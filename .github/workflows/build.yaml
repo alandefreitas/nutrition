@@ -1,4 +1,4 @@
-name: modern-nutrition
+name: nutrition
 
 on: [push, pull_request]
 
