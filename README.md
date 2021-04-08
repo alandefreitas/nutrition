@@ -3,7 +3,7 @@
 > Dynamic Preference-Based Diet Optimization 
 
 <p align="center">
-  <img src="https://github.com/glauberss2007/modern-nutrition/blob/master/.github/workflows/images/optimization_model-fluxogram.png" height="350" width="auto" />
+  <img src="https://github.com/alandefreitas/nutrition/raw/master/documentation/images/model-fluxogram.png" height="350" width="auto" />
 </p>
 
 <br/>
