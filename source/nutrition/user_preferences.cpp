@@ -2,6 +2,7 @@
 #include "user_preferences.h"
 
 #include <utility>
+#include <chrono>
 
 namespace nutrition {
 

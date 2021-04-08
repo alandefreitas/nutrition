@@ -80,4 +80,5 @@ namespace nutrition {
     }
     const std::vector<nutrition_facts> &food_database::foods() const { return foods_; }
     void food_database::foods(const std::vector<nutrition_facts> &foods) { foods_ = foods; }
+    constexpr size_t food_database::size() const { return foods_.size(); }
 }
