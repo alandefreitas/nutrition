@@ -30,7 +30,7 @@ namespace nutrition {
         [[nodiscard]] const std::vector<nutrition_facts> &foods() const;
         void foods(const std::vector<nutrition_facts> &foods);
 
-        [[nodiscard]] constexpr size_t size() const;
+        [[nodiscard]] size_t size() const;
 
       private:
         /// \brief Nutrition facts for each food
