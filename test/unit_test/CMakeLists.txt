@@ -6,3 +6,6 @@
 #
 #add_executable(evaluation-tests evaluationTests.cpp)
 #target_link_libraries(evaluation-tests PUBLIC modern-nutrition-solver)
+
+add_executable(test-nutrition-facts test_nutrition_facts.cpp)
+target_link_libraries(test-nutrition-facts PUBLIC nutrition-solver)
