@@ -223,44 +223,53 @@ namespace nutrition {
         return *this;
     }
 
-
     nutrition_facts& nutrition_facts::operator/=(const nutrition_facts& other) {
-        // General
-        calories /= other.calories;
-
         // Serving size (in grams)
-        serving_weight /= other.serving_weight;
+        if (other.serving_weight <= 0 || other.calories <= 0 || other.protein <= 0 ||
+            other.fat <= 0 || other.carbohydrates <= 0 || other.sugars <= 0 ||
+            other.fiber <= 0 || other.cholesterol <= 0 || other.saturated_fats <= 0 ||
+            other.calcium <= 0 || other.iron <= 0 || other.potassium <= 0 ||
+            other.magnesium <= 0 || other.vitamin_a <= 0 || other.vitamin_c <= 0 ||
+            other.vitamin_b_12 <= 0 || other.vitamin_d <= 0 || other.vitamin_e <= 0 ||
+            other.omega_3 <= 0 || other.omega_6 <= 0 || other.lactose <= 0 ||
+            other.phosphorus <= 0 || other.sodium <= 0 || other.zinc <= 0 ||
+            other.copper <= 0 || other.manganese <= 0 || other.selenium <= 0 || other.carotene <= 0) return *this;
+        else{
+            serving_weight /= other.serving_weight;
 
-        // Basic Facts
-        protein /= other.protein;
-        fat /= other.fat;
-        carbohydrates /= other.carbohydrates;
-        sugars /= other.sugars;
-        fiber /= other.fiber;
-        cholesterol /= other.cholesterol;
-        saturated_fats /= other.saturated_fats;
+            // General
+            calories /= other.calories;
 
-        // Vitamins
-        calcium /= other.calcium;
-        iron /= other.iron;
-        potassium /= other.potassium;
-        magnesium /= other.magnesium;
-        vitamin_a /= other.vitamin_a;
-        vitamin_c /= other.vitamin_c;
-        vitamin_b_12 /= other.vitamin_b_12;
-        vitamin_d /= other.vitamin_d;
-        vitamin_e /= other.vitamin_e;
-        omega_3 /= other.omega_3;
-        omega_6 /= other.omega_6;
-        lactose /= other.lactose;
-        phosphorus /= other.phosphorus;
-        sodium /= other.sodium;
-        zinc /= other.zinc;
-        copper /= other.copper;
-        manganese /= other.manganese;
-        selenium /= other.selenium;
-        carotene /= other.carotene;
+            // Basic Facts
+            protein /= other.protein;
+            fat /= other.fat;
+            carbohydrates /= other.carbohydrates;
+            sugars /= other.sugars;
+            fiber /= other.fiber;
+            cholesterol /= other.cholesterol;
+            saturated_fats /= other.saturated_fats;
 
+            // Vitamins
+            calcium /= other.calcium;
+            iron /= other.iron;
+            potassium /= other.potassium;
+            magnesium /= other.magnesium;
+            vitamin_a /= other.vitamin_a;
+            vitamin_c /= other.vitamin_c;
+            vitamin_b_12 /= other.vitamin_b_12;
+            vitamin_d /= other.vitamin_d;
+            vitamin_e /= other.vitamin_e;
+            omega_3 /= other.omega_3;
+            omega_6 /= other.omega_6;
+            lactose /= other.lactose;
+            phosphorus /= other.phosphorus;
+            sodium /= other.sodium;
+            zinc /= other.zinc;
+            copper /= other.copper;
+            manganese /= other.manganese;
+            selenium /= other.selenium;
+            carotene /= other.carotene;
+        }
         return *this;
     }
 
