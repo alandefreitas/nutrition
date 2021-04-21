@@ -52,3 +52,31 @@ TEST_CASE( "Operator -=" ) {
     REQUIRE(tnfacts.calories == 0);
     REQUIRE(tnfacts.serving_weight == 0);
 }
+
+TEST_CASE( "Operator /=" ) {
+    tnfacts.serving_weight = 50;
+    tnfacts_other.serving_weight = 25;
+    tnfacts.calories = 10;
+    tnfacts_other.calories = 3;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    // Zero denominator
+    tnfacts.operator/=(tnfacts_other);
+    REQUIRE(tnfacts.calories == tnfacts.calories);
+    REQUIRE(tnfacts.serving_weight == tnfacts.serving_weight);
+
+}
+
+TEST_CASE( "Operator *=" ) {
+    tnfacts.serving_weight = 5;
+    tnfacts_other.serving_weight = 6;
+    tnfacts.calories = 10;
+    tnfacts_other.calories = 20;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    tnfacts.operator*=(tnfacts_other);
+    REQUIRE(tnfacts.calories == (tnfacts_before_c * tnfacts_other.calories));
+    REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw * tnfacts_other.serving_weight));
+}
