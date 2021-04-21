@@ -31,3 +31,24 @@ TEST_CASE( "Operator +=" ) {
     REQUIRE(tnfacts_other_before_sw == (tnfacts_other.serving_weight/2));
     REQUIRE(tnfacts_other_before_c == (tnfacts_other.calories/2));
 }
+
+TEST_CASE( "Operator -=" ) {
+    tnfacts.serving_weight = 30;
+    tnfacts_other.serving_weight = 20;
+    tnfacts.calories = 3;
+    tnfacts_other.calories = 2;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+    tnfacts.operator-=(tnfacts_other);
+    REQUIRE(tnfacts.calories == (tnfacts_before_c - tnfacts_other.calories));
+    REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw - tnfacts_other.serving_weight));
+
+    // no negative test
+    tnfacts.serving_weight = 30;
+    tnfacts_other.serving_weight = 35;
+    tnfacts.calories = 3;
+    tnfacts_other.calories = 4;
+    tnfacts.operator-=(tnfacts_other);
+    REQUIRE(tnfacts.calories == 0);
+    REQUIRE(tnfacts.serving_weight == 0);
+}
