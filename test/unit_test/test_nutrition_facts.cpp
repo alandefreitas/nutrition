@@ -58,8 +58,6 @@ TEST_CASE( "Operator /=" ) {
     tnfacts_other.serving_weight = 25;
     tnfacts.calories = 10;
     tnfacts_other.calories = 3;
-    double tnfacts_before_sw = tnfacts.serving_weight;
-    double tnfacts_before_c = tnfacts.calories;
 
     // Zero denominator
     tnfacts.operator/=(tnfacts_other);
