@@ -78,3 +78,97 @@ TEST_CASE( "Operator *=" ) {
     REQUIRE(tnfacts.calories == (tnfacts_before_c * tnfacts_other.calories));
     REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw * tnfacts_other.serving_weight));
 }
+
+/// Scalar Operator test
+TEST_CASE( "Scalar Operator *=" ) {
+    double scalar_change = 5;
+    tnfacts.serving_weight = 5;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    tnfacts.operator*=(scalar_change);
+    REQUIRE(tnfacts.calories == (tnfacts_before_c * scalar_change));
+    REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw * scalar_change));
+}
+
+TEST_CASE( "Scalar Operator /=" ) {
+    double scalar_change = 3;
+    tnfacts.serving_weight = 5;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    tnfacts.operator/=(scalar_change);
+    REQUIRE(tnfacts.calories == (tnfacts_before_c / scalar_change));
+    REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw / scalar_change));
+}
+
+TEST_CASE( "Scalar Operator /" ) {
+    double scalar_change = 2;
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    nutrition::nutrition_facts t = tnfacts.operator/(scalar_change);
+    REQUIRE(t.calories == (tnfacts_before_c / scalar_change));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw / scalar_change));
+}
+
+TEST_CASE( "Scalar Operator *" ) {
+    double scalar_change = 2;
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    nutrition::nutrition_facts t = tnfacts.operator*(scalar_change);
+    REQUIRE(t.calories == (tnfacts_before_c * scalar_change));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw * scalar_change));
+}
+
+TEST_CASE( "Operator *" ) {
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    nutrition::nutrition_facts t = tnfacts.operator*(tnfacts);
+    REQUIRE(t.calories == (tnfacts_before_c * tnfacts_before_c));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw * tnfacts_before_sw));
+}
+
+TEST_CASE( "Operator +" ) {
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    nutrition::nutrition_facts t = tnfacts.operator+(tnfacts);
+    REQUIRE(t.calories == (tnfacts_before_c + tnfacts_before_c));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw + tnfacts_before_sw));
+}
+
+TEST_CASE( "Operator -" ) {
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    nutrition::nutrition_facts t = tnfacts.operator-(tnfacts);
+    REQUIRE(t.calories == (tnfacts_before_c - tnfacts_before_c));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw - tnfacts_before_sw));
+}
+
+TEST_CASE( "Operator /" ) {
+    tnfacts.serving_weight = 6;
+    tnfacts.calories = 10;
+    double tnfacts_before_sw = tnfacts.serving_weight;
+    double tnfacts_before_c = tnfacts.calories;
+
+    // Zero denominator
+    nutrition::nutrition_facts t = tnfacts.operator/(tnfacts);
+    REQUIRE(t.calories == (tnfacts_before_c));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw));
+}
