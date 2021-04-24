@@ -9,3 +9,6 @@
 
 add_executable(test-nutrition-facts test_nutrition_facts.cpp)
 target_link_libraries(test-nutrition-facts PUBLIC nutrition-solver)
+
+add_executable(test-food-database test_food_database.cpp)
+target_link_libraries(test-food-database PUBLIC nutrition-solver)
