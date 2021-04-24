@@ -14,6 +14,11 @@ set(MODERN_NUTRITION_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
+# To avoid csvlibs gcov error
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS
+        "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+
 # To find or download packages
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 message("CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
@@ -35,6 +40,7 @@ CPMAddPackage(
         GITHUB_REPOSITORY USCiLab/cereal
         DOWNLOAD_ONLY TRUE
 )
+add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 add_library(cereal INTERFACE)
 target_include_directories(cereal INTERFACE ${cereal_SRC_DIR}/include)
 
@@ -47,7 +53,6 @@ if (csv-parser_ADDED)
 else ()
     message(FATAL_ERROR "Cannot find or download csv-parser")
 endif ()
-
 
 #######################################################
 ### Options                                         ###
@@ -92,7 +97,6 @@ endif()
 if (BUILD_WITH_UTF8 AND MSVC)
     set(CMAKE_CXX_FLAGS "/utf-8")
 endif ()
-
 
 #######################################################
 ### Library                                         ###
