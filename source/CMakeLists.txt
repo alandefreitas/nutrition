@@ -47,5 +47,4 @@ message("nutrition-solver include dirs=${INCLUDE_DIRS}")
 #######################################################
 # LOCAL_PATH is unfortunately hard-coded for now
 set(RESOURCES_PATH "${MODERN_NUTRITION_ROOT}/resources/")
-target_compile_definitions(nutrition-solver PRIVATE -DRESOURCES_PATH=\"${RESOURCES_PATH}\")
-
+target_compile_definitions(nutrition-solver PUBLIC -DRESOURCES_PATH=\"${RESOURCES_PATH}\")
