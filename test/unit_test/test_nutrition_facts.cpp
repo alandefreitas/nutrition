@@ -42,27 +42,48 @@ TEST_CASE( "Operator -=" ) {
     tnfacts.operator-=(tnfacts_other);
     REQUIRE(tnfacts.calories == (tnfacts_before_c - tnfacts_other.calories));
     REQUIRE(tnfacts.serving_weight == (tnfacts_before_sw - tnfacts_other.serving_weight));
-
-    // no negative test
-    tnfacts.serving_weight = 30;
-    tnfacts_other.serving_weight = 35;
-    tnfacts.calories = 3;
-    tnfacts_other.calories = 4;
-    tnfacts.operator-=(tnfacts_other);
-    REQUIRE(tnfacts.calories == 0);
-    REQUIRE(tnfacts.serving_weight == 0);
 }
 
 TEST_CASE( "Operator /=" ) {
-    tnfacts.serving_weight = 50;
-    tnfacts_other.serving_weight = 25;
-    tnfacts.calories = 10;
-    tnfacts_other.calories = 3;
+    // Set no zero values avoiding ASSERT invariants error
+    tnfacts.serving_weight++;
+    // General
+    tnfacts.calories++;
+    // Basic Facts
+    tnfacts.protein++;
+    tnfacts.fat++;
+    tnfacts.carbohydrates++;
+    tnfacts.sugars++;
+    tnfacts.fiber++;
+    tnfacts.cholesterol++;
+    tnfacts.saturated_fats++;
+    // Vitamins
+    tnfacts.calcium++;
+    tnfacts.iron++;
+    tnfacts.potassium++;
+    tnfacts.magnesium++;
+    tnfacts.vitamin_a++;
+    tnfacts.vitamin_c++;
+    tnfacts.vitamin_b_12++;
+    tnfacts.vitamin_d++;
+    tnfacts.vitamin_e++;
+    tnfacts.omega_3++;
+    tnfacts.omega_6++;
+    tnfacts.lactose++;
+    tnfacts.phosphorus++;
+    tnfacts.sodium++;
+    tnfacts.zinc++;
+    tnfacts.copper++;
+    tnfacts.manganese++;
+    tnfacts.selenium++;
+    tnfacts.carotene++;
 
-    // Zero denominator
-    tnfacts.operator/=(tnfacts_other);
-    REQUIRE(tnfacts.calories == tnfacts.calories);
-    REQUIRE(tnfacts.serving_weight == tnfacts.serving_weight);
+    double tnfacts_other_before_sw = tnfacts_other.serving_weight;
+    double tnfacts_other_before_c = tnfacts_other.calories;
+
+    tnfacts_other.operator/=(tnfacts);
+    REQUIRE(tnfacts_other.calories == (tnfacts_other_before_c / tnfacts.calories));
+    REQUIRE(tnfacts_other.serving_weight == (tnfacts_other_before_sw / tnfacts.serving_weight));
 
 }
 
@@ -93,9 +114,8 @@ TEST_CASE( "Scalar Operator *=" ) {
 }
 
 TEST_CASE( "Scalar Operator /=" ) {
-    double scalar_change = 3;
-    tnfacts.serving_weight = 5;
-    tnfacts.calories = 10;
+    double scalar_change = 2;
+
     double tnfacts_before_sw = tnfacts.serving_weight;
     double tnfacts_before_c = tnfacts.calories;
 
@@ -162,13 +182,43 @@ TEST_CASE( "Operator -" ) {
 }
 
 TEST_CASE( "Operator /" ) {
-    tnfacts.serving_weight = 6;
-    tnfacts.calories = 10;
+    // Set no zero values avoiding ASSERT invariants error
+    tnfacts.serving_weight++;
+    // General
+    tnfacts.calories++;
+    // Basic Facts
+    tnfacts.protein++;
+    tnfacts.fat++;
+    tnfacts.carbohydrates++;
+    tnfacts.sugars++;
+    tnfacts.fiber++;
+    tnfacts.cholesterol++;
+    tnfacts.saturated_fats++;
+    // Vitamins
+    tnfacts.calcium++;
+    tnfacts.iron++;
+    tnfacts.potassium++;
+    tnfacts.magnesium++;
+    tnfacts.vitamin_a++;
+    tnfacts.vitamin_c++;
+    tnfacts.vitamin_b_12++;
+    tnfacts.vitamin_d++;
+    tnfacts.vitamin_e++;
+    tnfacts.omega_3++;
+    tnfacts.omega_6++;
+    tnfacts.lactose++;
+    tnfacts.phosphorus++;
+    tnfacts.sodium++;
+    tnfacts.zinc++;
+    tnfacts.copper++;
+    tnfacts.manganese++;
+    tnfacts.selenium++;
+    tnfacts.carotene++;
+
     double tnfacts_before_sw = tnfacts.serving_weight;
     double tnfacts_before_c = tnfacts.calories;
 
-    // Zero denominator
     nutrition::nutrition_facts t = tnfacts.operator/(tnfacts);
-    REQUIRE(t.calories == (tnfacts_before_c));
-    REQUIRE(t.serving_weight == (tnfacts_before_sw));
+    REQUIRE(t.calories == (tnfacts_before_c / tnfacts.calories));
+    REQUIRE(t.serving_weight == (tnfacts_before_sw / tnfacts.serving_weight));
 }
