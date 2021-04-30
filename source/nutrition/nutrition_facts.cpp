@@ -3,7 +3,7 @@
 //
 
 #include "nutrition_facts.h"
-
+#include <cassert>
 namespace nutrition {
     std::ostream &operator<<(std::ostream &os,
                           const nutrition::nutrition_facts &facts) {
@@ -110,80 +110,54 @@ namespace nutrition {
         return *this;
     }
 
-
     nutrition_facts& nutrition_facts::operator-=(const nutrition_facts& other) {
+
         // Serving size (in grams)
         serving_weight -= other.serving_weight;
-        if(serving_weight<0){
-            *this = *this*0;
-            return *this;
-        } else{
+        // General
+        calories -= other.calories;
 
-            // General
-            calories -= other.calories;
-            if (calories < 0) calories=0;
+        // Basic Facts
+        protein -= other.protein;
+        fat -= other.fat;
+        carbohydrates -= other.carbohydrates;
+        sugars -= other.sugars;
+        fiber -= other.fiber;
+        cholesterol -= other.cholesterol;
+        saturated_fats -= other.saturated_fats;
 
-            // Basic Facts
-            protein -= other.protein;
-            if (protein < 0) protein=0;
-            fat -= other.fat;
-            if (fat < 0) fat=0;
-            carbohydrates -= other.carbohydrates;
-            if (carbohydrates < 0) carbohydrates=0;
-            sugars -= other.sugars;
-            if (sugars < 0) sugars=0;
-            fiber -= other.fiber;
-            if (fiber < 0) fiber=0;
-            cholesterol -= other.cholesterol;
-            if (cholesterol < 0) cholesterol=0;
-            saturated_fats -= other.saturated_fats;
-            if (saturated_fats < 0) saturated_fats=0;
+        // Vitamins
+        calcium -= other.calcium;
+        iron -= other.iron;
+        potassium -= other.potassium;
+        magnesium -= other.magnesium;
+        vitamin_a -= other.vitamin_a;
+        vitamin_c -= other.vitamin_c;
+        vitamin_b_12 -= other.vitamin_b_12;
+        vitamin_d -= other.vitamin_d;
+        vitamin_e -= other.vitamin_e;
+        omega_3 -= other.omega_3;
+        omega_6 -= other.omega_6;
+        lactose -= other.lactose;
+        phosphorus -= other.phosphorus;
+        sodium -= other.sodium;
+        zinc -= other.zinc;
+        copper -= other.copper;
+        manganese -= other.manganese;
+        selenium -= other.selenium;
+        carotene -= other.carotene;
 
-            // Vitamins
-            calcium -= other.calcium;
-            if (calcium < 0) calcium=0;
-            iron -= other.iron;
-            if (iron < 0) iron=0;
-            potassium -= other.potassium;
-            if (potassium < 0) potassium=0;
-            magnesium -= other.magnesium;
-            if (magnesium < 0) magnesium=0;
-            vitamin_a -= other.vitamin_a;
-            if (vitamin_a < 0) vitamin_a=0;
-            vitamin_c -= other.vitamin_c;
-            if (vitamin_c < 0) vitamin_c=0;
-            vitamin_b_12 -= other.vitamin_b_12;
-            if (vitamin_b_12 < 0) vitamin_b_12=0;
-            vitamin_d -= other.vitamin_d;
-            if (vitamin_d < 0) vitamin_d=0;
-            vitamin_e -= other.vitamin_e;
-            if (vitamin_e < 0) vitamin_e=0;
-            omega_3 -= other.omega_3;
-            if (omega_3 < 0) omega_3=0;
-            omega_6 -= other.omega_6;
-            if (omega_6 < 0) omega_6=0;
-            lactose -= other.lactose;
-            if (lactose < 0) lactose=0;
-            phosphorus -= other.phosphorus;
-            if (phosphorus < 0) phosphorus=0;
-            sodium -= other.sodium;
-            if (sodium < 0) sodium=0;
-            zinc -= other.zinc;
-            if (zinc < 0) zinc=0;
-            copper -= other.copper;
-            if (copper < 0) copper=0;
-            manganese -= other.manganese;
-            if (manganese < 0) manganese=0;
-            selenium -= other.selenium;
-            if (selenium < 0) selenium=0;
-            carotene -= other.carotene;
-            if (carotene < 0) carotene=0;
-        }
+        // Check for invalid negative result
+        invariant_no_negative_result_only(*this);
+
 
         return *this;
     }
 
     nutrition_facts& nutrition_facts::operator*=(const nutrition_facts& other) {
+        // Check nutritional facts object for invalid nutritional value (allow zeros)
+        invariant_no_negative_only(other);
+
         // General
         calories *= other.calories;
 
@@ -224,52 +198,46 @@ namespace nutrition {
     }
 
     nutrition_facts& nutrition_facts::operator/=(const nutrition_facts& other) {
+        // Check nutritional facts object for invalid nutritional value
+        invariant_no_zero_and_negative(other);
+
         // Serving size (in grams)
-        if (other.serving_weight <= 0 || other.calories <= 0 || other.protein <= 0 ||
-            other.fat <= 0 || other.carbohydrates <= 0 || other.sugars <= 0 ||
-            other.fiber <= 0 || other.cholesterol <= 0 || other.saturated_fats <= 0 ||
-            other.calcium <= 0 || other.iron <= 0 || other.potassium <= 0 ||
-            other.magnesium <= 0 || other.vitamin_a <= 0 || other.vitamin_c <= 0 ||
-            other.vitamin_b_12 <= 0 || other.vitamin_d <= 0 || other.vitamin_e <= 0 ||
-            other.omega_3 <= 0 || other.omega_6 <= 0 || other.lactose <= 0 ||
-            other.phosphorus <= 0 || other.sodium <= 0 || other.zinc <= 0 ||
-            other.copper <= 0 || other.manganese <= 0 || other.selenium <= 0 || other.carotene <= 0) return *this;
-        else{
-            serving_weight /= other.serving_weight;
+        serving_weight /= other.serving_weight;
 
-            // General
-            calories /= other.calories;
+        // General
+        calories /= other.calories;
 
-            // Basic Facts
-            protein /= other.protein;
-            fat /= other.fat;
-            carbohydrates /= other.carbohydrates;
-            sugars /= other.sugars;
-            fiber /= other.fiber;
-            cholesterol /= other.cholesterol;
-            saturated_fats /= other.saturated_fats;
+        // Basic Facts
+        protein /= other.protein;
+        fat /= other.fat;
+        carbohydrates /= other.carbohydrates;
+        sugars /= other.sugars;
+        fiber /= other.fiber;
+        cholesterol /= other.cholesterol;
+        saturated_fats /= other.saturated_fats;
 
-            // Vitamins
-            calcium /= other.calcium;
-            iron /= other.iron;
-            potassium /= other.potassium;
-            magnesium /= other.magnesium;
-            vitamin_a /= other.vitamin_a;
-            vitamin_c /= other.vitamin_c;
-            vitamin_b_12 /= other.vitamin_b_12;
-            vitamin_d /= other.vitamin_d;
-            vitamin_e /= other.vitamin_e;
-            omega_3 /= other.omega_3;
-            omega_6 /= other.omega_6;
-            lactose /= other.lactose;
-            phosphorus /= other.phosphorus;
-            sodium /= other.sodium;
-            zinc /= other.zinc;
-            copper /= other.copper;
-            manganese /= other.manganese;
-            selenium /= other.selenium;
-            carotene /= other.carotene;
-        }
+
+        // Vitamins
+        calcium /= other.calcium;
+        iron /= other.iron;
+        potassium /= other.potassium;
+        magnesium /= other.magnesium;
+        vitamin_a /= other.vitamin_a;
+        vitamin_c /= other.vitamin_c;
+        vitamin_b_12 /= other.vitamin_b_12;
+        vitamin_d /= other.vitamin_d;
+        vitamin_e /= other.vitamin_e;
+        omega_3 /= other.omega_3;
+        omega_6 /= other.omega_6;
+        lactose /= other.lactose;
+        phosphorus /= other.phosphorus;
+        sodium /= other.sodium;
+        zinc /= other.zinc;
+        copper /= other.copper;
+        manganese /= other.manganese;
+        selenium /= other.selenium;
+        carotene /= other.carotene;
+
         return *this;
     }
 
@@ -286,6 +254,9 @@ namespace nutrition {
     }
 
     nutrition_facts& nutrition_facts::operator*=(double scalar) {
+        // No negative factor scalar check (allow zeros)
+        assert(invariant_no_negative_only(scalar));
+
         // General
         calories *= scalar;
 
@@ -326,6 +297,9 @@ namespace nutrition {
     }
 
     nutrition_facts& nutrition_facts::operator/=(double scalar) {
+        // No zero and negative denominator scalar check
+        assert(invariant_no_zero_and_negative(scalar));
+
         // General
         calories /= scalar;
 
@@ -365,4 +339,114 @@ namespace nutrition {
         return *this;
     }
 
+    // no zero invariant applied to denominator of operator/=
+    bool nutrition_facts::invariant_no_zero_and_negative(double value){
+        return value > 0;
+    }
+
+    void nutrition_facts::invariant_no_zero_and_negative(const nutrition_facts& other_to_check){
+        // Check for invalid values of each nutrient
+        assert(invariant_no_zero_and_negative(other_to_check.serving_weight));
+        assert(invariant_no_zero_and_negative(other_to_check.calories));
+
+        assert(invariant_no_zero_and_negative(other_to_check.protein));
+        assert(invariant_no_zero_and_negative(other_to_check.fat));
+        assert(invariant_no_zero_and_negative(other_to_check.carbohydrates));
+        assert(invariant_no_zero_and_negative(other_to_check.sugars));
+        assert(invariant_no_zero_and_negative(other_to_check.fiber));
+        assert(invariant_no_zero_and_negative(other_to_check.cholesterol));
+        assert(invariant_no_zero_and_negative(other_to_check.saturated_fats));
+
+        assert(invariant_no_zero_and_negative(other_to_check.calcium));
+        assert(invariant_no_zero_and_negative(other_to_check.iron));
+        assert(invariant_no_zero_and_negative(other_to_check.potassium));
+        assert(invariant_no_zero_and_negative(other_to_check.magnesium));
+        assert(invariant_no_zero_and_negative(other_to_check.vitamin_a));
+        assert(invariant_no_zero_and_negative(other_to_check.vitamin_b_12));
+        assert(invariant_no_zero_and_negative(other_to_check.vitamin_c));
+        assert(invariant_no_zero_and_negative(other_to_check.vitamin_d));
+        assert(invariant_no_zero_and_negative(other_to_check.vitamin_e));
+        assert(invariant_no_zero_and_negative(other_to_check.omega_3));
+        assert(invariant_no_zero_and_negative(other_to_check.omega_6));
+        assert(invariant_no_zero_and_negative(other_to_check.lactose));
+        assert(invariant_no_zero_and_negative(other_to_check.phosphorus));
+        assert(invariant_no_zero_and_negative(other_to_check.sodium));
+        assert(invariant_no_zero_and_negative(other_to_check.zinc));
+        assert(invariant_no_zero_and_negative(other_to_check.copper));
+        assert(invariant_no_zero_and_negative(other_to_check.manganese));
+        assert(invariant_no_zero_and_negative(other_to_check.selenium));
+        assert(invariant_no_zero_and_negative(other_to_check.carotene));
+    }
+
+    // Check negative value resulting of operator-= and operator*= (allow zero)
+    bool nutrition_facts::invariant_no_negative_only(double result){
+        return result >= 0;
+    }
+
+    // Check for invalid values of each nutrient (allow zero)
+    void nutrition_facts::invariant_no_negative_only(const nutrition_facts& other_to_check){
+        assert(invariant_no_negative_only(other_to_check.serving_weight));
+        assert(invariant_no_negative_only(other_to_check.calories));
+
+        assert(invariant_no_negative_only(other_to_check.protein));
+        assert(invariant_no_negative_only(other_to_check.fat));
+        assert(invariant_no_negative_only(other_to_check.carbohydrates));
+        assert(invariant_no_negative_only(other_to_check.sugars));
+        assert(invariant_no_negative_only(other_to_check.fiber));
+        assert(invariant_no_negative_only(other_to_check.cholesterol));
+        assert(invariant_no_negative_only(other_to_check.saturated_fats));
+
+        assert(invariant_no_negative_only(other_to_check.calcium));
+        assert(invariant_no_negative_only(other_to_check.iron));
+        assert(invariant_no_negative_only(other_to_check.potassium));
+        assert(invariant_no_negative_only(other_to_check.magnesium));
+        assert(invariant_no_negative_only(other_to_check.vitamin_a));
+        assert(invariant_no_negative_only(other_to_check.vitamin_b_12));
+        assert(invariant_no_negative_only(other_to_check.vitamin_c));
+        assert(invariant_no_negative_only(other_to_check.vitamin_d));
+        assert(invariant_no_negative_only(other_to_check.vitamin_e));
+        assert(invariant_no_negative_only(other_to_check.omega_3));
+        assert(invariant_no_negative_only(other_to_check.omega_6));
+        assert(invariant_no_negative_only(other_to_check.lactose));
+        assert(invariant_no_negative_only(other_to_check.phosphorus));
+        assert(invariant_no_negative_only(other_to_check.sodium));
+        assert(invariant_no_negative_only(other_to_check.zinc));
+        assert(invariant_no_negative_only(other_to_check.copper));
+        assert(invariant_no_negative_only(other_to_check.manganese));
+        assert(invariant_no_negative_only(other_to_check.selenium));
+        assert(invariant_no_negative_only(other_to_check.carotene));
+    }
+
+    void nutrition_facts::invariant_no_negative_result_only(const nutrition_facts& result){
+        assert(invariant_no_negative_only(result.serving_weight));
+        assert(invariant_no_negative_only(result.calories));
+
+        assert(invariant_no_negative_only(result.protein));
+        assert(invariant_no_negative_only(result.fat));
+        assert(invariant_no_negative_only(result.carbohydrates));
+        assert(invariant_no_negative_only(result.sugars));
+        assert(invariant_no_negative_only(result.fiber));
+        assert(invariant_no_negative_only(result.cholesterol));
+        assert(invariant_no_negative_only(result.saturated_fats));
+
+        assert(invariant_no_negative_only(result.calcium));
+        assert(invariant_no_negative_only(result.iron));
+        assert(invariant_no_negative_only(result.potassium));
+        assert(invariant_no_negative_only(result.magnesium));
+        assert(invariant_no_negative_only(result.vitamin_a));
+        assert(invariant_no_negative_only(result.vitamin_b_12));
+        assert(invariant_no_negative_only(result.vitamin_c));
+        assert(invariant_no_negative_only(result.vitamin_d));
+        assert(invariant_no_negative_only(result.vitamin_e));
+        assert(invariant_no_negative_only(result.omega_3));
+        assert(invariant_no_negative_only(result.omega_6));
+        assert(invariant_no_negative_only(result.lactose));
+        assert(invariant_no_negative_only(result.phosphorus));
+        assert(invariant_no_negative_only(result.sodium));
+        assert(invariant_no_negative_only(result.zinc));
+        assert(invariant_no_negative_only(result.copper));
+        assert(invariant_no_negative_only(result.manganese));
+        assert(invariant_no_negative_only(result.selenium));
+        assert(invariant_no_negative_only(result.carotene));
+    }
 }
