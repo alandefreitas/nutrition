@@ -28,7 +28,7 @@ TEST_CASE( "Nutritional Load" ) {
     //REQUIRE(_tfoods[14163].group == "");
 
     // Serving size (in grams)
-    REQUIRE(_tfoods[0].serving_weight == 0 );
+    REQUIRE(_tfoods[0].serving_weight == 34 );
     REQUIRE(_tfoods[14163].serving_weight == 0);
 
     // Basic Facts
@@ -40,7 +40,7 @@ TEST_CASE( "Nutritional Load" ) {
     REQUIRE(_tfoods[0].cholesterol == 0);
     REQUIRE(_tfoods[0].saturated_fats == 2.941);
     REQUIRE(_tfoods[14163].protein == 0);
-    //REQUIRE(_tfoods[14163].fat == 100);
+    REQUIRE(_tfoods[14163].fat == 100);
     REQUIRE(_tfoods[14163].carbohydrates == 0);
     REQUIRE(_tfoods[14163].sugars == 0);
     REQUIRE(_tfoods[14163].fiber == 0);
@@ -61,7 +61,7 @@ TEST_CASE( "Nutritional Load" ) {
     REQUIRE(_tfoods[0].omega_6 == 0);
     REQUIRE(_tfoods[0].lactose == 0);
     REQUIRE(_tfoods[0].phosphorus == 0);
-    //REQUIRE(_tfoods[0].sodium == 1059);
+    REQUIRE(_tfoods[0].sodium == 1059);
     REQUIRE(_tfoods[0].zinc == 0);
     REQUIRE(_tfoods[0].copper == 0);
     REQUIRE(_tfoods[0].manganese == 0);
@@ -76,8 +76,8 @@ TEST_CASE( "Nutritional Load" ) {
     REQUIRE(_tfoods[14163].vitamin_b_12 == 0);
     REQUIRE(_tfoods[14163].vitamin_d == 0);
     REQUIRE(_tfoods[14163].vitamin_e == 10.5);
-    //REQUIRE(_tfoods[14163].omega_3 == 1698);
-    //REQUIRE(_tfoods[14163].omega_6 == 30114);
+    REQUIRE(_tfoods[14163].omega_3 == 1698);
+    REQUIRE(_tfoods[14163].omega_6 == 30114);
     REQUIRE(_tfoods[14163].lactose == 0);
     REQUIRE(_tfoods[14163].phosphorus == 0);
     REQUIRE(_tfoods[14163].sodium == 0);
