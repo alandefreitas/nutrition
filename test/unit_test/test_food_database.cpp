@@ -8,13 +8,12 @@
 #include "nutrition/food_database.h"
 #include "nutrition/nutrition_facts.h"
 
-TEST_CASE( "Load database" ) {
+TEST_CASE( "Database Load size test" ) {
     nutrition::food_database tfd;
-    REQUIRE(tfd.size() >= 0);
-    REQUIRE(tfd.size() < 14165 );
+    REQUIRE(tfd.size() > 0);
 }
 
-TEST_CASE( "Nutritional Load" ) {
+TEST_CASE( "Calories and name load test" ) {
     nutrition::food_database tfd;
     std::vector<nutrition::nutrition_facts> _tfoods;
     _tfoods = tfd.foods();
@@ -24,12 +23,24 @@ TEST_CASE( "Nutritional Load" ) {
     REQUIRE(_tfoods[14163].calories == 892);
     REQUIRE(_tfoods[0].name == "Pillsbury Golden Layer Buttermilk Biscuits Artificial Flavor Refrigerated Dough");
     REQUIRE(_tfoods[14163].name == "Industrial Oil As Ingredient In Food");
-    //REQUIRE(_tfoods[0].group == "Baked Foods");
-    //REQUIRE(_tfoods[14163].group == "");
+    // REQUIRE(_tfoods[0].group == "Baked Foods");
+    // REQUIRE(_tfoods[14163].group == "");
+}
+
+TEST_CASE( "Serving Weight load test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods;
+    _tfoods = tfd.foods();
 
     // Serving size (in grams)
-    REQUIRE(_tfoods[0].serving_weight == 34 );
+    REQUIRE(_tfoods[0].serving_weight == 34);
     REQUIRE(_tfoods[14163].serving_weight == 0);
+}
+
+TEST_CASE( "Basic facts values load test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods;
+    _tfoods = tfd.foods();
 
     // Basic Facts
     REQUIRE(_tfoods[0].protein == 5.88);
@@ -46,6 +57,12 @@ TEST_CASE( "Nutritional Load" ) {
     REQUIRE(_tfoods[14163].fiber == 0);
     REQUIRE(_tfoods[14163].cholesterol == 0);
     REQUIRE(_tfoods[14163].saturated_fats == 32.672);
+}
+
+TEST_CASE( "Vitamins values load test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods;
+    _tfoods = tfd.foods();
 
     // Vitamins
     REQUIRE(_tfoods[0].calcium == 0);
