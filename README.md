@@ -150,6 +150,7 @@ PS: The category preference was used due a limitation provided due no real consu
 
 ## Coming soon
 
+- expand the capacity of the caloric compensation mechanism by adding physical exercises for cases in which there is an excess caloric intake where it is not possible to compensate.
 - easy database change using cereal lib for txt/csv nutrition facts serialize or sql DB connection for MYSQL relational db query
 - dynamic minimization cost considering
 - different solvers
