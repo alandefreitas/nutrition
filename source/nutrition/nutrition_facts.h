@@ -79,16 +79,8 @@ namespace nutrition {
         nutrition_facts& operator/=(double scalar);
 
       private:
-        /// Invariants
-        // No zero and negative for operator/=
-        void invariant_no_zero_and_negative(const nutrition_facts& other_to_check);
-        bool invariant_no_zero_and_negative(double scalar);
-        // No negative value for operator*= (allow zeros)
-        bool invariant_no_negative_only(double value);
-        void invariant_no_negative_only(const nutrition_facts& other_to_check);
-        // No negative result value for operator-=
-        void invariant_no_negative_result_only(const nutrition_facts& result);
-
+        // Invariants
+        const bool invariants();
     };
 
 }
