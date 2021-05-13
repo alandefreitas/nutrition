@@ -14,11 +14,6 @@ set(MODERN_NUTRITION_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-# To avoid csvlibs gcov error
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
-set(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
-
 # To find or download packages
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 message("CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
@@ -66,9 +61,12 @@ endif ()
 set(MATPLOT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Check if we are in debug mode
-if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(DEBUG_MODE ON)
     set(NOT_DEBUG_MODE OFF)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_EXE_LINKER_FLAGS
+            "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 else()
     set(DEBUG_MODE OFF)
     set(NOT_DEBUG_MODE ON)
