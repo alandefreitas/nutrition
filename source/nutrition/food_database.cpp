@@ -28,7 +28,7 @@ namespace nutrition {
                 tmp.name = row["Name"].get<std::string>();
 
                 auto double_or_zero = [](csv::CSVField field) -> double {
-                  if (field.is_float() || field.is_int() || field.is_num()) {
+                  if (field.is_num()) {
                       return field.get<double>();
                   } else {
                       return 0.0;
