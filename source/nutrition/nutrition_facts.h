@@ -60,24 +60,11 @@ namespace nutrition {
         // Convenience operator -
         nutrition_facts operator-(const nutrition_facts& other) const;
 
-        // Convenience operator *
-        nutrition_facts operator*(const nutrition_facts& other) const;
-
-        // Convenience operator /
-        nutrition_facts operator/(const nutrition_facts& other) const;
-
         // Convenience operator +=
         nutrition_facts& operator+=(const nutrition_facts& other);
 
         // Convenience operator -=
         nutrition_facts& operator-=(const nutrition_facts& other);
-
-        // Convenience operator *=
-        nutrition_facts& operator*=(const nutrition_facts& other);
-
-        // Convenience operator /=
-        nutrition_facts& operator/=(const nutrition_facts& other);
-
 
         // Convenience operator *
         nutrition_facts operator*(double scalar) const;

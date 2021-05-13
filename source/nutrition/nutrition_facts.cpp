@@ -58,18 +58,6 @@ namespace nutrition {
         return c;
     }
 
-    nutrition_facts nutrition_facts::operator*(const nutrition_facts& other) const {
-        nutrition_facts c(*this);
-        c *= other;
-        return c;
-    }
-
-    nutrition_facts nutrition_facts::operator/(const nutrition_facts& other) const {
-        nutrition_facts c(*this);
-        c /= other;
-        return c;
-    }
-
     nutrition_facts& nutrition_facts::operator+=(const nutrition_facts& other) {
         // General
         calories += other.calories;
@@ -150,93 +138,6 @@ namespace nutrition {
         // Check for invalid negative result
         invariant_no_negative_result_only(*this);
 
-
-        return *this;
-    }
-
-    nutrition_facts& nutrition_facts::operator*=(const nutrition_facts& other) {
-        // Check nutritional facts object for invalid nutritional value (allow zeros)
-        invariant_no_negative_only(other);
-
-        // General
-        calories *= other.calories;
-
-        // Serving size (in grams)
-        serving_weight *= other.serving_weight;
-
-        // Basic Facts
-        protein *= other.protein;
-        fat *= other.fat;
-        carbohydrates *= other.carbohydrates;
-        sugars *= other.sugars;
-        fiber *= other.fiber;
-        cholesterol *= other.cholesterol;
-        saturated_fats *= other.saturated_fats;
-
-        // Vitamins
-        calcium *= other.calcium;
-        iron *= other.iron;
-        potassium *= other.potassium;
-        magnesium *= other.magnesium;
-        vitamin_a *= other.vitamin_a;
-        vitamin_c *= other.vitamin_c;
-        vitamin_b_12 *= other.vitamin_b_12;
-        vitamin_d *= other.vitamin_d;
-        vitamin_e *= other.vitamin_e;
-        omega_3 *= other.omega_3;
-        omega_6 *= other.omega_6;
-        lactose *= other.lactose;
-        phosphorus *= other.phosphorus;
-        sodium *= other.sodium;
-        zinc *= other.zinc;
-        copper *= other.copper;
-        manganese *= other.manganese;
-        selenium *= other.selenium;
-        carotene *= other.carotene;
-
-        return *this;
-    }
-
-    nutrition_facts& nutrition_facts::operator/=(const nutrition_facts& other) {
-        // Check nutritional facts object for invalid nutritional value
-        invariant_no_zero_and_negative(other);
-
-        // Serving size (in grams)
-        serving_weight /= other.serving_weight;
-
-        // General
-        calories /= other.calories;
-
-        // Basic Facts
-        protein /= other.protein;
-        fat /= other.fat;
-        carbohydrates /= other.carbohydrates;
-        sugars /= other.sugars;
-        fiber /= other.fiber;
-        cholesterol /= other.cholesterol;
-        saturated_fats /= other.saturated_fats;
-
-
-        // Vitamins
-        calcium /= other.calcium;
-        iron /= other.iron;
-        potassium /= other.potassium;
-        magnesium /= other.magnesium;
-        vitamin_a /= other.vitamin_a;
-        vitamin_c /= other.vitamin_c;
-        vitamin_b_12 /= other.vitamin_b_12;
-        vitamin_d /= other.vitamin_d;
-        vitamin_e /= other.vitamin_e;
-        omega_3 /= other.omega_3;
-        omega_6 /= other.omega_6;
-        lactose /= other.lactose;
-        phosphorus /= other.phosphorus;
-        sodium /= other.sodium;
-        zinc /= other.zinc;
-        copper /= other.copper;
-        manganese /= other.manganese;
-        selenium /= other.selenium;
-        carotene /= other.carotene;
 
         return *this;
     }
