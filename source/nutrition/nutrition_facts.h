@@ -80,7 +80,7 @@ namespace nutrition {
 
       private:
         // Invariants
-        const bool invariants();
+        [[nodiscard]] bool invariants() const;
     };
 
 }
