@@ -64,8 +64,6 @@ set(MATPLOT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 if(CMAKE_BUILD_TYPE MATCHES "(Debug|DEBUG|debug|RelWithDebInfo|RELWITHDEBINFO|relwithdebinfo)")
     add_compile_options(${GCC_COVERAGE_COMPILE_FLAGS})
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-    set(CMAKE_EXE_LINKER_FLAGS
-            "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 else()
     set(DEBUG_MODE OFF)
     set(NOT_DEBUG_MODE ON)
