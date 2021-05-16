@@ -35,7 +35,7 @@ CPMAddPackage(
         GITHUB_REPOSITORY USCiLab/cereal
         DOWNLOAD_ONLY TRUE
 )
-add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
+
 add_library(cereal INTERFACE)
 target_include_directories(cereal INTERFACE ${cereal_SRC_DIR}/include)
 
@@ -61,9 +61,10 @@ endif ()
 set(MATPLOT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Check if we are in debug mode
-if(CMAKE_BUILD_TYPE MATCHES Debug)
+if(CMAKE_BUILD_TYPE MATCHES "(Debug|DEBUG|debug|RelWithDebInfo|RELWITHDEBINFO|relwithdebinfo)")
     set(DEBUG_MODE ON)
     set(NOT_DEBUG_MODE OFF)
+    add_compile_options(${GCC_COVERAGE_COMPILE_FLAGS})
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
     set(CMAKE_EXE_LINKER_FLAGS
             "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
