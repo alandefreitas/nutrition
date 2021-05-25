@@ -61,66 +61,40 @@ namespace nutrition {
     nutrition_facts& nutrition_facts::operator+=(const nutrition_facts& other) {
         // General
         calories += other.calories;
-        assert(this->invariants());
 
         // Serving size (in grams)
         serving_weight += other.serving_weight;
-        assert(this->invariants());
 
         // Basic Facts
         protein += other.protein;
-        assert(this->invariants());
         fat += other.fat;
-        assert(this->invariants());
         carbohydrates += other.carbohydrates;
-        assert(this->invariants());
         sugars += other.sugars;
-        assert(this->invariants());
         fiber += other.fiber;
-        assert(this->invariants());
         cholesterol += other.cholesterol;
-        assert(this->invariants());
         saturated_fats += other.saturated_fats;
-        assert(this->invariants());
 
         // Vitamins
         calcium += other.calcium;
-        assert(this->invariants());
         iron += other.iron;
-        assert(this->invariants());
         potassium += other.potassium;
-        assert(this->invariants());
         magnesium += other.magnesium;
-        assert(this->invariants());
         vitamin_a += other.vitamin_a;
-        assert(this->invariants());
         vitamin_c += other.vitamin_c;
-        assert(this->invariants());
         vitamin_b_12 += other.vitamin_b_12;
-        assert(this->invariants());
         vitamin_d += other.vitamin_d;
-        assert(this->invariants());
         vitamin_e += other.vitamin_e;
-        assert(this->invariants());
         omega_3 += other.omega_3;
-        assert(this->invariants());
         omega_6 += other.omega_6;
-        assert(this->invariants());
         lactose += other.lactose;
-        assert(this->invariants());
         phosphorus += other.phosphorus;
-        assert(this->invariants());
         sodium += other.sodium;
-        assert(this->invariants());
         zinc += other.zinc;
-        assert(this->invariants());
         copper += other.copper;
-        assert(this->invariants());
         manganese += other.manganese;
-        assert(this->invariants());
         selenium += other.selenium;
-        assert(this->invariants());
         carotene += other.carotene;
+
         assert(this->invariants());
 
         return *this;
@@ -130,65 +104,39 @@ namespace nutrition {
 
         // Serving size (in grams)
         serving_weight -= other.serving_weight;
-        assert(this->invariants());
         // General
         calories -= other.calories;
-        assert(this->invariants());
 
         // Basic Facts
         protein -= other.protein;
-        assert(this->invariants());
         fat -= other.fat;
-        assert(this->invariants());
         carbohydrates -= other.carbohydrates;
-        assert(this->invariants());
         sugars -= other.sugars;
-        assert(this->invariants());
         fiber -= other.fiber;
-        assert(this->invariants());
         cholesterol -= other.cholesterol;
-        assert(this->invariants());
         saturated_fats -= other.saturated_fats;
-        assert(this->invariants());
 
         // Vitamins
         calcium -= other.calcium;
-        assert(this->invariants());
         iron -= other.iron;
-        assert(this->invariants());
         potassium -= other.potassium;
-        assert(this->invariants());
         magnesium -= other.magnesium;
-        assert(this->invariants());
         vitamin_a -= other.vitamin_a;
-        assert(this->invariants());
         vitamin_c -= other.vitamin_c;
-        assert(this->invariants());
         vitamin_b_12 -= other.vitamin_b_12;
-        assert(this->invariants());
         vitamin_d -= other.vitamin_d;
-        assert(this->invariants());
         vitamin_e -= other.vitamin_e;
-        assert(this->invariants());
         omega_3 -= other.omega_3;
-        assert(this->invariants());
         omega_6 -= other.omega_6;
-        assert(this->invariants());
         lactose -= other.lactose;
-        assert(this->invariants());
         phosphorus -= other.phosphorus;
-        assert(this->invariants());
         sodium -= other.sodium;
-        assert(this->invariants());
         zinc -= other.zinc;
-        assert(this->invariants());
         copper -= other.copper;
-        assert(this->invariants());
         manganese -= other.manganese;
-        assert(this->invariants());
         selenium -= other.selenium;
-        assert(this->invariants());
         carotene -= other.carotene;
+
         assert(this->invariants());
 
         return *this;
@@ -210,66 +158,40 @@ namespace nutrition {
 
         // General
         calories *= scalar;
-        assert(this->invariants());
 
         // Serving size (in grams)
         serving_weight *= scalar;
-        assert(this->invariants());
 
         // Basic Facts
         protein *= scalar;
-        assert(this->invariants());
         fat *= scalar;
-        assert(this->invariants());
         carbohydrates *= scalar;
-        assert(this->invariants());
         sugars *= scalar;
-        assert(this->invariants());
         fiber *= scalar;
-        assert(this->invariants());
         cholesterol *= scalar;
-        assert(this->invariants());
         saturated_fats *= scalar;
-        assert(this->invariants());
 
         // Vitamins
         calcium *= scalar;
-        assert(this->invariants());
         iron *= scalar;
-        assert(this->invariants());
         potassium *= scalar;
-        assert(this->invariants());
         magnesium *= scalar;
-        assert(this->invariants());
         vitamin_a *= scalar;
-        assert(this->invariants());
         vitamin_c *= scalar;
-        assert(this->invariants());
         vitamin_b_12 *= scalar;
-        assert(this->invariants());
         vitamin_d *= scalar;
-        assert(this->invariants());
         vitamin_e *= scalar;
-        assert(this->invariants());
         omega_3 *= scalar;
-        assert(this->invariants());
         omega_6 *= scalar;
-        assert(this->invariants());
         lactose *= scalar;
-        assert(this->invariants());
         phosphorus *= scalar;
-        assert(this->invariants());
         sodium *= scalar;
-        assert(this->invariants());
         zinc *= scalar;
-        assert(this->invariants());
         copper *= scalar;
-        assert(this->invariants());
         manganese *= scalar;
-        assert(this->invariants());
         selenium *= scalar;
-        assert(this->invariants());
         carotene *= scalar;
+
         assert(this->invariants());
 
         return *this;
@@ -279,66 +201,40 @@ namespace nutrition {
 
         // General
         calories /= scalar;
-        assert(this->invariants());
 
         // Serving size (in grams)
         serving_weight /= scalar;
-        assert(this->invariants());
 
         // Basic Facts
         protein /= scalar;
-        assert(this->invariants());
         fat /= scalar;
-        assert(this->invariants());
         carbohydrates /= scalar;
-        assert(this->invariants());
         sugars /= scalar;
-        assert(this->invariants());
         fiber /= scalar;
-        assert(this->invariants());
         cholesterol /= scalar;
-        assert(this->invariants());
         saturated_fats /= scalar;
-        assert(this->invariants());
 
         // Vitamins
         calcium /= scalar;
-        assert(this->invariants());
         iron /= scalar;
-        assert(this->invariants());
         potassium /= scalar;
-        assert(this->invariants());
         magnesium /= scalar;
-        assert(this->invariants());
         vitamin_a /= scalar;
-        assert(this->invariants());
         vitamin_c /= scalar;
-        assert(this->invariants());
         vitamin_b_12 /= scalar;
-        assert(this->invariants());
         vitamin_d /= scalar;
-        assert(this->invariants());
         vitamin_e /= scalar;
-        assert(this->invariants());
         omega_3 /= scalar;
-        assert(this->invariants());
         omega_6 /= scalar;
-        assert(this->invariants());
         lactose /= scalar;
-        assert(this->invariants());
         phosphorus /= scalar;
-        assert(this->invariants());
         sodium /= scalar;
-        assert(this->invariants());
         zinc /= scalar;
-        assert(this->invariants());
         copper /= scalar;
-        assert(this->invariants());
         manganese /= scalar;
-        assert(this->invariants());
         selenium /= scalar;
-        assert(this->invariants());
         carotene /= scalar;
+
         assert(this->invariants());
 
         return *this;
