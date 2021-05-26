@@ -3,7 +3,7 @@
 //
 
 #include "nutrition_facts.h"
-
+#include <cassert>
 namespace nutrition {
     std::ostream &operator<<(std::ostream &os,
                           const nutrition::nutrition_facts &facts) {
@@ -58,18 +58,6 @@ namespace nutrition {
         return c;
     }
 
-    nutrition_facts nutrition_facts::operator*(const nutrition_facts& other) const {
-        nutrition_facts c(*this);
-        c *= other;
-        return c;
-    }
-
-    nutrition_facts nutrition_facts::operator/(const nutrition_facts& other) const {
-        nutrition_facts c(*this);
-        c /= other;
-        return c;
-    }
-
     nutrition_facts& nutrition_facts::operator+=(const nutrition_facts& other) {
         // General
         calories += other.calories;
@@ -107,16 +95,17 @@ namespace nutrition {
         selenium += other.selenium;
         carotene += other.carotene;
 
+        assert(this->invariants());
+
         return *this;
     }
 
-
     nutrition_facts& nutrition_facts::operator-=(const nutrition_facts& other) {
-        // General
-        calories -= other.calories;
 
         // Serving size (in grams)
         serving_weight -= other.serving_weight;
+        // General
+        calories -= other.calories;
 
         // Basic Facts
         protein -= other.protein;
@@ -148,87 +137,7 @@ namespace nutrition {
         selenium -= other.selenium;
         carotene -= other.carotene;
 
-        return *this;
-    }
-
-
-    nutrition_facts& nutrition_facts::operator*=(const nutrition_facts& other) {
-        // General
-        calories *= other.calories;
-
-        // Serving size (in grams)
-        serving_weight *= other.serving_weight;
-
-        // Basic Facts
-        protein *= other.protein;
-        fat *= other.fat;
-        carbohydrates *= other.carbohydrates;
-        sugars *= other.sugars;
-        fiber *= other.fiber;
-        cholesterol *= other.cholesterol;
-        saturated_fats *= other.saturated_fats;
-
-        // Vitamins
-        calcium *= other.calcium;
-        iron *= other.iron;
-        potassium *= other.potassium;
-        magnesium *= other.magnesium;
-        vitamin_a *= other.vitamin_a;
-        vitamin_c *= other.vitamin_c;
-        vitamin_b_12 *= other.vitamin_b_12;
-        vitamin_d *= other.vitamin_d;
-        vitamin_e *= other.vitamin_e;
-        omega_3 *= other.omega_3;
-        omega_6 *= other.omega_6;
-        lactose *= other.lactose;
-        phosphorus *= other.phosphorus;
-        sodium *= other.sodium;
-        zinc *= other.zinc;
-        copper *= other.copper;
-        manganese *= other.manganese;
-        selenium *= other.selenium;
-        carotene *= other.carotene;
-
-        return *this;
-    }
-
-
-    nutrition_facts& nutrition_facts::operator/=(const nutrition_facts& other) {
-        // General
-        calories /= other.calories;
-
-        // Serving size (in grams)
-        serving_weight /= other.serving_weight;
-
-        // Basic Facts
-        protein /= other.protein;
-        fat /= other.fat;
-        carbohydrates /= other.carbohydrates;
-        sugars /= other.sugars;
-        fiber /= other.fiber;
-        cholesterol /= other.cholesterol;
-        saturated_fats /= other.saturated_fats;
-
-        // Vitamins
-        calcium /= other.calcium;
-        iron /= other.iron;
-        potassium /= other.potassium;
-        magnesium /= other.magnesium;
-        vitamin_a /= other.vitamin_a;
-        vitamin_c /= other.vitamin_c;
-        vitamin_b_12 /= other.vitamin_b_12;
-        vitamin_d /= other.vitamin_d;
-        vitamin_e /= other.vitamin_e;
-        omega_3 /= other.omega_3;
-        omega_6 /= other.omega_6;
-        lactose /= other.lactose;
-        phosphorus /= other.phosphorus;
-        sodium /= other.sodium;
-        zinc /= other.zinc;
-        copper /= other.copper;
-        manganese /= other.manganese;
-        selenium /= other.selenium;
-        carotene /= other.carotene;
+        assert(this->invariants());
 
         return *this;
     }
@@ -246,6 +155,7 @@ namespace nutrition {
     }
 
     nutrition_facts& nutrition_facts::operator*=(double scalar) {
+
         // General
         calories *= scalar;
 
@@ -282,10 +192,13 @@ namespace nutrition {
         selenium *= scalar;
         carotene *= scalar;
 
+        assert(this->invariants());
+
         return *this;
     }
 
     nutrition_facts& nutrition_facts::operator/=(double scalar) {
+
         // General
         calories /= scalar;
 
@@ -322,7 +235,43 @@ namespace nutrition {
         selenium /= scalar;
         carotene /= scalar;
 
+        assert(this->invariants());
+
         return *this;
     }
 
+    // Invariant check
+    bool nutrition_facts::invariants() const{
+        // Check for invalid result value of each nutrient
+        if (this->serving_weight <0) return false;
+        if (this->calories < 0) return false;
+        if (this->protein <0) return false;
+        if (this->fat <0) return false;
+        if (this->carbohydrates <0)return false;
+        if (this->sugars <0) return false;
+        if (this->fiber <0) return false;
+        if (this->cholesterol <0)return false;
+        if (this->saturated_fats <0) return false;
+        if (this->calcium <0) return false;
+        if (this->iron <0) return false;
+        if (this->potassium <0) return false;
+        if (this->magnesium <0)return false;
+        if (this->vitamin_a <0) return false;
+        if (this->vitamin_b_12 <0) return false;
+        if (this->vitamin_c <0) return false;
+        if (this->vitamin_d <0) return false;
+        if (this->vitamin_e <0) return false;
+        if (this->omega_3 <0) return false;
+        if (this->omega_6 <0) return false;
+        if (this->lactose <0) return false;
+        if (this->phosphorus <0) return false;
+        if (this->sodium <0) return false;
+        if (this->zinc <0) return false;
+        if (this->copper <0) return false;
+        if (this->manganese <0) return false;
+        if (this->selenium <0) return false;
+        if (this->carotene <0) return false;
+
+        return true;
+    }
 }

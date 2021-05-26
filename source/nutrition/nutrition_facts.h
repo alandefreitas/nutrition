@@ -52,7 +52,7 @@ namespace nutrition {
 
         // Stream operator
         friend std::ostream &operator<<(std::ostream &os,
-                                        const nutrition_facts &facts);
+                                       const nutrition_facts &facts);
 
         // Convenience operator +
         nutrition_facts operator+(const nutrition_facts& other) const;
@@ -60,24 +60,11 @@ namespace nutrition {
         // Convenience operator -
         nutrition_facts operator-(const nutrition_facts& other) const;
 
-        // Convenience operator *
-        nutrition_facts operator*(const nutrition_facts& other) const;
-
-        // Convenience operator /
-        nutrition_facts operator/(const nutrition_facts& other) const;
-
         // Convenience operator +=
         nutrition_facts& operator+=(const nutrition_facts& other);
 
         // Convenience operator -=
         nutrition_facts& operator-=(const nutrition_facts& other);
-
-        // Convenience operator *=
-        nutrition_facts& operator*=(const nutrition_facts& other);
-
-        // Convenience operator /=
-        nutrition_facts& operator/=(const nutrition_facts& other);
-
 
         // Convenience operator *
         nutrition_facts operator*(double scalar) const;
@@ -91,7 +78,9 @@ namespace nutrition {
         // Convenience operator /=
         nutrition_facts& operator/=(double scalar);
 
-
+      private:
+        // Invariants
+        [[nodiscard]] bool invariants() const;
     };
 
 }
