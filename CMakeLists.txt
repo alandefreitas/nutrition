@@ -86,7 +86,7 @@ if (BUILD_WITH_PEDANTIC_WARNINGS)
     if (MSVC)
         add_compile_options(/W4 /WX)
     else()
-        add_compile_options(-Wall -Wextra -pedantic -Werror -Wno-reorder)
+        add_compile_options(-Wall -Wextra -pedantic -Werror)
     endif()
 endif()
 

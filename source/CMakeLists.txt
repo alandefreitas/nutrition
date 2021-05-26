@@ -35,8 +35,8 @@ add_library(nutrition-solver
 #        nutrition/dynamic_optimization.h
 )
 target_include_directories(nutrition-solver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_include_directories(nutrition-solver PUBLIC ${CMAKE_BINARY_DIR}/_deps/cereal-src/include)
-target_include_directories(nutrition-solver PUBLIC ${CMAKE_BINARY_DIR}/_deps/csv-parser-src/include)
+target_include_directories(nutrition-solver SYSTEM PUBLIC ${CMAKE_BINARY_DIR}/_deps/cereal-src/include)
+target_include_directories(nutrition-solver SYSTEM PUBLIC ${CMAKE_BINARY_DIR}/_deps/csv-parser-src/include)
 target_link_libraries(nutrition-solver PUBLIC matplot cereal csv)
 
 get_target_property(INCLUDE_DIRS nutrition-solver INCLUDE_DIRECTORIES)
