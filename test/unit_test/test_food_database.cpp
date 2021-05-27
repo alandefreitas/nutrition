@@ -8,9 +8,9 @@
 #include "nutrition/food_database.h"
 #include "nutrition/nutrition_facts.h"
 
-TEST_CASE( "Database Load size test" ) {
+TEST_CASE( "Database Load test" ) {
     nutrition::food_database tfd;
-    REQUIRE(tfd.size() > 0);
+    REQUIRE(tfd.size() != 0);
 }
 
 TEST_CASE( "Calories and name load test" ) {
@@ -59,7 +59,7 @@ TEST_CASE( "Basic facts values load test" ) {
     REQUIRE(_tfoods[14163].saturated_fats == 32.672);
 }
 
-TEST_CASE( "Vitamins values load test" ) {
+TEST_CASE( "Vitamins values correct load test" ) {
     nutrition::food_database tfd;
     std::vector<nutrition::nutrition_facts> _tfoods;
     _tfoods = tfd.foods();
