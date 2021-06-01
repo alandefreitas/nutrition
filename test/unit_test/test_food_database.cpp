@@ -10,7 +10,8 @@
 
 TEST_CASE( "Database Load test" ) {
     nutrition::food_database tfd;
-    REQUIRE(tfd.size() != 0);
+    const std::vector<nutrition::nutrition_facts>& _tfoods = tfd.foods();
+    REQUIRE(!_tfoods.empty());
 }
 
 TEST_CASE( "Calories and name load test" ) {
@@ -103,4 +104,74 @@ TEST_CASE( "Vitamins values correct load test" ) {
     REQUIRE(_tfoods[14163].manganese == 0);
     REQUIRE(_tfoods[14163].selenium == 0);
     REQUIRE(_tfoods[14163].carotene == 0);
+}
+
+TEST_CASE( "Database DELETE manipulation test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods;
+    _tfoods = tfd.foods();
+
+    size_t before_size = _tfoods.size();
+    std::string before_food_name = _tfoods[before_size-1].name;
+
+    tfd.delete_food(_tfoods.size()-1);
+
+    _tfoods = tfd.foods();
+
+    //Verification
+    REQUIRE(_tfoods.size() == before_size-1);
+    REQUIRE(_tfoods[_tfoods.size()-1].name != before_food_name);
+}
+
+// Insert data
+TEST_CASE( "Database INSERT manipulation test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods = tfd.foods();
+
+    size_t before_size = _tfoods.size();
+    std::string before_food_name = _tfoods[before_size-1].name;
+
+    nutrition::nutrition_facts new_nf;
+    tfd.insert_food(new_nf);
+
+    _tfoods = tfd.foods();
+
+    // Verification
+    REQUIRE(_tfoods.size() == before_size+1);
+    REQUIRE(_tfoods.end()->name != before_food_name);
+}
+
+// Update data (SETTERS)
+TEST_CASE( "Database UPDATE (set) manipulation test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods = tfd.foods();
+
+    size_t before_size = _tfoods.size();
+    std::string before_food_name = _tfoods[before_size-1].name;
+
+    nutrition::nutrition_facts new_nf;
+    new_nf.name = "Test";
+
+    tfd.update_food(0,new_nf);
+    _tfoods = tfd.foods();
+
+    // Verification
+    REQUIRE(_tfoods[0].name == "Test");
+    REQUIRE(_tfoods[before_size-1].name == before_food_name);
+    REQUIRE(_tfoods.size() == before_size);
+}
+
+// Delete data
+TEST_CASE( "Database SELECT (get) manipulation test" ) {
+    nutrition::food_database tfd;
+    std::vector<nutrition::nutrition_facts> _tfoods = tfd.foods();
+
+    size_t before_size = _tfoods.size();
+    std::string before_food_name = _tfoods[before_size-1].name;
+
+    nutrition::nutrition_facts nutrition_fact_test = tfd.select_food(before_size-1);
+
+    // Verification
+    REQUIRE(nutrition_fact_test.name == _tfoods[before_size-1].name);
+    REQUIRE(_tfoods.size() == before_size);
 }
