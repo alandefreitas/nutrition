@@ -11,6 +11,5 @@ add_executable(test-nutrition-facts test_nutrition_facts.cpp)
 target_link_libraries(test-nutrition-facts PUBLIC nutrition-solver)
 
 # flags add to avoid
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 add_executable(test-food-database test_food_database.cpp)
-target_link_libraries(test-food-database PUBLIC nutrition-solver)
+target_link_libraries(test-food-database PUBLIC nutrition-solver -fprofile-arcs)
