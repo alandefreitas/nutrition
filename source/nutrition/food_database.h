@@ -32,6 +32,8 @@ namespace nutrition {
 
         [[nodiscard]] size_t size() const;
 
+        void delete_food(int food_index);
+
       private:
         /// \brief Nutrition facts for each food
         std::vector<nutrition_facts> foods_;
