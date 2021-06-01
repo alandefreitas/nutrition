@@ -34,6 +34,8 @@ namespace nutrition {
 
         void delete_food(int food_index);
         void update_food(int food_index, nutrition_facts food_to_update);
+        void insert_food(const nutrition_facts& new_food);
+        nutrition_facts select_food(int index);
 
       private:
         /// \brief Nutrition facts for each food

@@ -5,6 +5,7 @@
 #include "food_database.h"
 #include <fstream>
 #include <csv.hpp>
+#include <utility>
 
 namespace nutrition {
 
@@ -84,7 +85,8 @@ namespace nutrition {
 
     void food_database::delete_food(int food_index){foods_.begin() + food_index;}
     void food_database::update_food(int food_index, nutrition_facts new_food){
-        foods_[food_index] = new_food;
+        foods_[food_index] = std::move(new_food);
     }
-
+    void food_database::insert_food(const nutrition_facts& new_food) {foods_.push_back(new_food);}
+    nutrition_facts food_database::select_food(int index){return foods_[index];}
 }
