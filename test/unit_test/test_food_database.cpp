@@ -20,8 +20,8 @@ TEST_CASE( "Calories and name load test" ) {
     _tfoods = tfd.foods();
 
     // General
-    REQUIRE(_tfoods[0].calories == 307);
-    REQUIRE(_tfoods[14163].calories == 892);
+    REQUIRE(_tfoods[0].calories == Approx(307));
+    REQUIRE(_tfoods[14163].calories == Approx(892));
     REQUIRE(_tfoods[0].name == "Pillsbury Golden Layer Buttermilk Biscuits Artificial Flavor Refrigerated Dough");
     REQUIRE(_tfoods[14163].name == "Industrial Oil As Ingredient In Food");
     // REQUIRE(_tfoods[0].group == "Baked Foods");
@@ -34,8 +34,8 @@ TEST_CASE( "Serving Weight load test" ) {
     _tfoods = tfd.foods();
 
     // Serving size (in grams)
-    REQUIRE(_tfoods[0].serving_weight == 34);
-    REQUIRE(_tfoods[14163].serving_weight == 0);
+    REQUIRE(_tfoods[0].serving_weight == Approx(34));
+    REQUIRE(_tfoods[14163].serving_weight == Approx(0));
 }
 
 TEST_CASE( "Basic facts values load test" ) {
@@ -44,20 +44,20 @@ TEST_CASE( "Basic facts values load test" ) {
     _tfoods = tfd.foods();
 
     // Basic Facts
-    REQUIRE(_tfoods[0].protein == 5.88);
-    REQUIRE(_tfoods[0].fat == 13.24);
-    REQUIRE(_tfoods[0].carbohydrates == 41.18);
-    REQUIRE(_tfoods[0].sugars == 5.88);
-    REQUIRE(_tfoods[0].fiber == 1.2);
-    REQUIRE(_tfoods[0].cholesterol == 0);
-    REQUIRE(_tfoods[0].saturated_fats == 2.941);
-    REQUIRE(_tfoods[14163].protein == 0);
-    REQUIRE(_tfoods[14163].fat == 100);
-    REQUIRE(_tfoods[14163].carbohydrates == 0);
-    REQUIRE(_tfoods[14163].sugars == 0);
-    REQUIRE(_tfoods[14163].fiber == 0);
-    REQUIRE(_tfoods[14163].cholesterol == 0);
-    REQUIRE(_tfoods[14163].saturated_fats == 32.672);
+    REQUIRE(_tfoods[0].protein == Approx(5.88));
+    REQUIRE(_tfoods[0].fat == Approx(13.24));
+    REQUIRE(_tfoods[0].carbohydrates == Approx(41.18));
+    REQUIRE(_tfoods[0].sugars == Approx(5.88));
+    REQUIRE(_tfoods[0].fiber == Approx(1.2));
+    REQUIRE(_tfoods[0].cholesterol == Approx(0));
+    REQUIRE(_tfoods[0].saturated_fats == Approx(2.941));
+    REQUIRE(_tfoods[14163].protein == Approx(0));
+    REQUIRE(_tfoods[14163].fat == Approx(100));
+    REQUIRE(_tfoods[14163].carbohydrates == Approx(0));
+    REQUIRE(_tfoods[14163].sugars == Approx(0));
+    REQUIRE(_tfoods[14163].fiber == Approx(0));
+    REQUIRE(_tfoods[14163].cholesterol == Approx(0));
+    REQUIRE(_tfoods[14163].saturated_fats == Approx(32.672));
 }
 
 TEST_CASE( "Vitamins values correct load test" ) {
@@ -66,44 +66,44 @@ TEST_CASE( "Vitamins values correct load test" ) {
     _tfoods = tfd.foods();
 
     // Vitamins
-    REQUIRE(_tfoods[0].calcium == 0);
-    REQUIRE(_tfoods[0].iron == 2.12);
-    REQUIRE(_tfoods[0].potassium == 0);
-    REQUIRE(_tfoods[0].magnesium == 0);
-    REQUIRE(_tfoods[0].vitamin_a == 0);
-    REQUIRE(_tfoods[0].vitamin_c == 0);
-    REQUIRE(_tfoods[0].vitamin_b_12 == 0);
-    REQUIRE(_tfoods[0].vitamin_d == 0);
-    REQUIRE(_tfoods[0].vitamin_e == 0);
-    REQUIRE(_tfoods[0].omega_3 == 0);
-    REQUIRE(_tfoods[0].omega_6 == 0);
-    REQUIRE(_tfoods[0].lactose == 0);
-    REQUIRE(_tfoods[0].phosphorus == 0);
-    REQUIRE(_tfoods[0].sodium == 1059);
-    REQUIRE(_tfoods[0].zinc == 0);
-    REQUIRE(_tfoods[0].copper == 0);
-    REQUIRE(_tfoods[0].manganese == 0);
-    REQUIRE(_tfoods[0].selenium == 0);
-    REQUIRE(_tfoods[0].carotene == 0);
-    REQUIRE(_tfoods[14163].calcium == 0);
-    REQUIRE(_tfoods[14163].iron == 0.04);
-    REQUIRE(_tfoods[14163].potassium == 0);
-    REQUIRE(_tfoods[14163].magnesium == 0);
-    REQUIRE(_tfoods[14163].vitamin_a == 0);
-    REQUIRE(_tfoods[14163].vitamin_c == 0);
-    REQUIRE(_tfoods[14163].vitamin_b_12 == 0);
-    REQUIRE(_tfoods[14163].vitamin_d == 0);
-    REQUIRE(_tfoods[14163].vitamin_e == 10.5);
-    REQUIRE(_tfoods[14163].omega_3 == 1698);
-    REQUIRE(_tfoods[14163].omega_6 == 30114);
-    REQUIRE(_tfoods[14163].lactose == 0);
-    REQUIRE(_tfoods[14163].phosphorus == 0);
-    REQUIRE(_tfoods[14163].sodium == 0);
-    REQUIRE(_tfoods[14163].zinc == 0.01);
-    REQUIRE(_tfoods[14163].copper == 0);
-    REQUIRE(_tfoods[14163].manganese == 0);
-    REQUIRE(_tfoods[14163].selenium == 0);
-    REQUIRE(_tfoods[14163].carotene == 0);
+    REQUIRE(_tfoods[0].calcium == Approx(0));
+    REQUIRE(_tfoods[0].iron == Approx(2.12));
+    REQUIRE(_tfoods[0].potassium == Approx(0));
+    REQUIRE(_tfoods[0].magnesium == Approx(0));
+    REQUIRE(_tfoods[0].vitamin_a == Approx(0));
+    REQUIRE(_tfoods[0].vitamin_c == Approx(0));
+    REQUIRE(_tfoods[0].vitamin_b_12 == Approx(0));
+    REQUIRE(_tfoods[0].vitamin_d == Approx(0));
+    REQUIRE(_tfoods[0].vitamin_e == Approx(0));
+    REQUIRE(_tfoods[0].omega_3 == Approx(0));
+    REQUIRE(_tfoods[0].omega_6 == Approx(0));
+    REQUIRE(_tfoods[0].lactose == Approx(0));
+    REQUIRE(_tfoods[0].phosphorus == Approx(0));
+    REQUIRE(_tfoods[0].sodium == Approx(1059));
+    REQUIRE(_tfoods[0].zinc == Approx(0));
+    REQUIRE(_tfoods[0].copper == Approx(0));
+    REQUIRE(_tfoods[0].manganese == Approx(0));
+    REQUIRE(_tfoods[0].selenium == Approx(0));
+    REQUIRE(_tfoods[0].carotene == Approx(0));
+    REQUIRE(_tfoods[14163].calcium == Approx(0));
+    REQUIRE(_tfoods[14163].iron == Approx(0.04));
+    REQUIRE(_tfoods[14163].potassium == Approx(0));
+    REQUIRE(_tfoods[14163].magnesium == Approx(0));
+    REQUIRE(_tfoods[14163].vitamin_a == Approx(0));
+    REQUIRE(_tfoods[14163].vitamin_c == Approx(0));
+    REQUIRE(_tfoods[14163].vitamin_b_12 == Approx(0));
+    REQUIRE(_tfoods[14163].vitamin_d == Approx(0));
+    REQUIRE(_tfoods[14163].vitamin_e == Approx(10.5));
+    REQUIRE(_tfoods[14163].omega_3 == Approx(1698));
+    REQUIRE(_tfoods[14163].omega_6 == Approx(30114));
+    REQUIRE(_tfoods[14163].lactose == Approx(0));
+    REQUIRE(_tfoods[14163].phosphorus == Approx(0));
+    REQUIRE(_tfoods[14163].sodium == Approx(0));
+    REQUIRE(_tfoods[14163].zinc == Approx(0.01));
+    REQUIRE(_tfoods[14163].copper == Approx(0));
+    REQUIRE(_tfoods[14163].manganese == Approx(0));
+    REQUIRE(_tfoods[14163].selenium == Approx(0));
+    REQUIRE(_tfoods[14163].carotene == Approx(0));
 }
 
 TEST_CASE( "Database DELETE manipulation test" ) {
