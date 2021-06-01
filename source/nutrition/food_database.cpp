@@ -83,5 +83,8 @@ namespace nutrition {
     size_t food_database::size() const { return foods_.size(); }
 
     void food_database::delete_food(int food_index){foods_.begin() + food_index;}
+    void food_database::update_food(int food_index, nutrition_facts new_food){
+        foods_[food_index] = new_food;
+    }
 
 }

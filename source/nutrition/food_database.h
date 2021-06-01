@@ -33,6 +33,7 @@ namespace nutrition {
         [[nodiscard]] size_t size() const;
 
         void delete_food(int food_index);
+        void update_food(int food_index, nutrition_facts food_to_update);
 
       private:
         /// \brief Nutrition facts for each food
