@@ -72,7 +72,7 @@ namespace nutrition {
                 tmp.selenium = double_or_zero(row["Selenium, Se (mcg)"]);
                 tmp.carotene = double_or_zero(row["Carotene, beta (mcg)"]);
 
-                (void)foods_.emplace_back(tmp);
+                foods_.emplace_back(tmp);
             }
         } else {
             throw std::runtime_error("serialization::load_nutrition_facts: "
