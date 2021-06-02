@@ -20,8 +20,8 @@ TEST_CASE( "Calories and name load test" ) {
     _tfoods = tfd.foods();
 
     // General
-    REQUIRE(_tfoods[0].calories == Approx(307));
-    REQUIRE(_tfoods[14163].calories == Approx(892));
+    REQUIRE(_tfoods[0].calories == Approx(307).epsilon(0.01));
+    REQUIRE(_tfoods[14163].calories == Approx(892).epsilon(0.01));
     REQUIRE(_tfoods[0].name == "Pillsbury Golden Layer Buttermilk Biscuits Artificial Flavor Refrigerated Dough");
     REQUIRE(_tfoods[14163].name == "Industrial Oil As Ingredient In Food");
     // REQUIRE(_tfoods[0].group == "Baked Foods");
@@ -34,8 +34,8 @@ TEST_CASE( "Serving Weight load test" ) {
     _tfoods = tfd.foods();
 
     // Serving size (in grams)
-    REQUIRE(_tfoods[0].serving_weight == Approx(34));
-    REQUIRE(_tfoods[14163].serving_weight == Approx(0));
+    REQUIRE(_tfoods[0].serving_weight == Approx(34).epsilon(0.001));
+    REQUIRE(_tfoods[14163].serving_weight == Approx(0).epsilon(0.0001));
 }
 
 TEST_CASE( "Basic facts values load test" ) {
@@ -44,20 +44,20 @@ TEST_CASE( "Basic facts values load test" ) {
     _tfoods = tfd.foods();
 
     // Basic Facts
-    REQUIRE(_tfoods[0].protein == Approx(5.88));
-    REQUIRE(_tfoods[0].fat == Approx(13.24));
-    REQUIRE(_tfoods[0].carbohydrates == Approx(41.18));
-    REQUIRE(_tfoods[0].sugars == Approx(5.88));
-    REQUIRE(_tfoods[0].fiber == Approx(1.2));
-    REQUIRE(_tfoods[0].cholesterol == Approx(0));
-    REQUIRE(_tfoods[0].saturated_fats == Approx(2.941));
-    REQUIRE(_tfoods[14163].protein == Approx(0));
-    REQUIRE(_tfoods[14163].fat == Approx(100));
-    REQUIRE(_tfoods[14163].carbohydrates == Approx(0));
-    REQUIRE(_tfoods[14163].sugars == Approx(0));
-    REQUIRE(_tfoods[14163].fiber == Approx(0));
-    REQUIRE(_tfoods[14163].cholesterol == Approx(0));
-    REQUIRE(_tfoods[14163].saturated_fats == Approx(32.672));
+    REQUIRE(_tfoods[0].protein == Approx(5.88).epsilon(0.0001));
+    REQUIRE(_tfoods[0].fat == Approx(13.24).epsilon(0.001));
+    REQUIRE(_tfoods[0].carbohydrates == Approx(41.18).epsilon(0.001));
+    REQUIRE(_tfoods[0].sugars == Approx(5.88).epsilon(0.0001));
+    REQUIRE(_tfoods[0].fiber == Approx(1.2).epsilon(0.0001));
+    REQUIRE(_tfoods[0].cholesterol == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[0].saturated_fats == Approx(2.941).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].protein == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].fat == Approx(100).epsilon(0.01));
+    REQUIRE(_tfoods[14163].carbohydrates == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].sugars == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].fiber == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].cholesterol == Approx(0).epsilon(0.0001));
+    REQUIRE(_tfoods[14163].saturated_fats == Approx(32.672).epsilon(0.001));
 }
 
 TEST_CASE( "Vitamins values correct load test" ) {
