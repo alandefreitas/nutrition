@@ -45,7 +45,7 @@ TEST_CASE( "Basic facts values load test" ) {
 
     double one_decimal_limit = 0.0001;
     double two_decimal_limit = 0.001;
-    //double three_decimal_limit = 0.01;
+    double three_decimal_limit = 0.01;
     //double four_decimal_limit = 0.1;
 
     // Basic Facts
@@ -57,7 +57,7 @@ TEST_CASE( "Basic facts values load test" ) {
     REQUIRE(_tfoods[0].cholesterol == Approx(0).epsilon(one_decimal_limit));
     REQUIRE(_tfoods[0].saturated_fats == Approx(2.941).epsilon(one_decimal_limit));
     REQUIRE(_tfoods[14163].protein == Approx(0).epsilon(one_decimal_limit));
-    REQUIRE(_tfoods[14163].fat == Approx(100).epsilon(two_decimal_limit));
+    REQUIRE(_tfoods[14163].fat == Approx(100).epsilon(three_decimal_limit));
     REQUIRE(_tfoods[14163].carbohydrates == Approx(0).epsilon(one_decimal_limit));
     REQUIRE(_tfoods[14163].sugars == Approx(0).epsilon(one_decimal_limit));
     REQUIRE(_tfoods[14163].fiber == Approx(0).epsilon(one_decimal_limit));
