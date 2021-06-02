@@ -40,6 +40,8 @@ namespace nutrition {
 
         nutrition_facts at(unsigned index);
 
+        bool is_empty();
+
       private:
         /// \brief Nutrition facts for each food
         std::vector<nutrition_facts> foods_;

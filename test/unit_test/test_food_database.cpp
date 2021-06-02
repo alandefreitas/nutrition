@@ -10,8 +10,8 @@
 
 TEST_CASE( "Database Load test" ) {
     nutrition::food_database tfd;
-    const std::vector<nutrition::nutrition_facts>& _tfoods = tfd.foods();
-    REQUIRE(!_tfoods.empty());
+    //const std::vector<nutrition::nutrition_facts>& _tfoods = tfd.foods();
+    REQUIRE(!tfd.is_empty());
 }
 
 TEST_CASE( "Calories and name load test" ) {
