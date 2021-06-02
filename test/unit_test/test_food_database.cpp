@@ -45,8 +45,8 @@ TEST_CASE( "Basic facts values load test" ) {
 
     double one_decimal_limit = 0.0001;
     double two_decimal_limit = 0.001;
-    double three_decimal_limit = 0.01;
-    double four_decimal_limit = 0.1;
+    //double three_decimal_limit = 0.01;
+    //double four_decimal_limit = 0.1;
 
     // Basic Facts
     REQUIRE(_tfoods[0].protein == Approx(5.88).epsilon(one_decimal_limit));
@@ -70,45 +70,50 @@ TEST_CASE( "Vitamins values correct load test" ) {
     std::vector<nutrition::nutrition_facts> _tfoods;
     _tfoods = tfd.foods();
 
+    double one_decimal_limit = 0.0001;
+    double two_decimal_limit = 0.001;
+    //double three_decimal_limit = 0.01;
+    double four_decimal_limit = 0.1;
+
     // Vitamins
-    REQUIRE(_tfoods[0].calcium == Approx(0));
-    REQUIRE(_tfoods[0].iron == Approx(2.12));
-    REQUIRE(_tfoods[0].potassium == Approx(0));
-    REQUIRE(_tfoods[0].magnesium == Approx(0));
-    REQUIRE(_tfoods[0].vitamin_a == Approx(0));
-    REQUIRE(_tfoods[0].vitamin_c == Approx(0));
-    REQUIRE(_tfoods[0].vitamin_b_12 == Approx(0));
-    REQUIRE(_tfoods[0].vitamin_d == Approx(0));
-    REQUIRE(_tfoods[0].vitamin_e == Approx(0));
-    REQUIRE(_tfoods[0].omega_3 == Approx(0));
-    REQUIRE(_tfoods[0].omega_6 == Approx(0));
-    REQUIRE(_tfoods[0].lactose == Approx(0));
-    REQUIRE(_tfoods[0].phosphorus == Approx(0));
-    REQUIRE(_tfoods[0].sodium == Approx(1059));
-    REQUIRE(_tfoods[0].zinc == Approx(0));
-    REQUIRE(_tfoods[0].copper == Approx(0));
-    REQUIRE(_tfoods[0].manganese == Approx(0));
-    REQUIRE(_tfoods[0].selenium == Approx(0));
-    REQUIRE(_tfoods[0].carotene == Approx(0));
-    REQUIRE(_tfoods[14163].calcium == Approx(0));
-    REQUIRE(_tfoods[14163].iron == Approx(0.04));
-    REQUIRE(_tfoods[14163].potassium == Approx(0));
-    REQUIRE(_tfoods[14163].magnesium == Approx(0));
-    REQUIRE(_tfoods[14163].vitamin_a == Approx(0));
-    REQUIRE(_tfoods[14163].vitamin_c == Approx(0));
-    REQUIRE(_tfoods[14163].vitamin_b_12 == Approx(0));
-    REQUIRE(_tfoods[14163].vitamin_d == Approx(0));
-    REQUIRE(_tfoods[14163].vitamin_e == Approx(10.5));
-    REQUIRE(_tfoods[14163].omega_3 == Approx(1698));
-    REQUIRE(_tfoods[14163].omega_6 == Approx(30114));
-    REQUIRE(_tfoods[14163].lactose == Approx(0));
-    REQUIRE(_tfoods[14163].phosphorus == Approx(0));
-    REQUIRE(_tfoods[14163].sodium == Approx(0));
-    REQUIRE(_tfoods[14163].zinc == Approx(0.01));
-    REQUIRE(_tfoods[14163].copper == Approx(0));
-    REQUIRE(_tfoods[14163].manganese == Approx(0));
-    REQUIRE(_tfoods[14163].selenium == Approx(0));
-    REQUIRE(_tfoods[14163].carotene == Approx(0));
+    REQUIRE(_tfoods[0].calcium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].iron == Approx(2.12).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].potassium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].magnesium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].vitamin_a == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].vitamin_c == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].vitamin_b_12 == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].vitamin_d == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].vitamin_e == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].omega_3 == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].omega_6 == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].lactose == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].phosphorus == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].sodium == Approx(1059).epsilon(four_decimal_limit));
+    REQUIRE(_tfoods[0].zinc == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].copper == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].manganese == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].selenium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].carotene == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].calcium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].iron == Approx(0.04).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].potassium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].magnesium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].vitamin_a == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].vitamin_c == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].vitamin_b_12 == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].vitamin_d == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].vitamin_e == Approx(10.5).epsilon(two_decimal_limit));
+    REQUIRE(_tfoods[14163].omega_3 == Approx(1698).epsilon(four_decimal_limit));
+    REQUIRE(_tfoods[14163].omega_6 == Approx(30114).epsilon(four_decimal_limit));
+    REQUIRE(_tfoods[14163].lactose == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].phosphorus == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].sodium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].zinc == Approx(0.01).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].copper == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].manganese == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].selenium == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].carotene == Approx(0).epsilon(one_decimal_limit));
 }
 
 TEST_CASE( "Database DELETE manipulation test" ) {
