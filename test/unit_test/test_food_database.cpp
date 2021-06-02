@@ -114,7 +114,7 @@ TEST_CASE( "Database DELETE manipulation test" ) {
     size_t before_size = _tfoods.size();
     std::string before_food_name = _tfoods[before_size-1].name;
 
-    tfd.delete_food(_tfoods.size()-1);
+    tfd.remove(_tfoods.size()-1);
 
     _tfoods = tfd.foods();
 
@@ -132,7 +132,7 @@ TEST_CASE( "Database INSERT manipulation test" ) {
     std::string before_food_name = _tfoods[before_size-1].name;
 
     nutrition::nutrition_facts new_nf;
-    tfd.insert_food(new_nf);
+    tfd.insert(new_nf);
 
     _tfoods = tfd.foods();
 
@@ -152,7 +152,7 @@ TEST_CASE( "Database UPDATE (set) manipulation test" ) {
     nutrition::nutrition_facts new_nf;
     new_nf.name = "Test";
 
-    tfd.update_food(0,new_nf);
+    tfd.update(0,new_nf);
     _tfoods = tfd.foods();
 
     // Verification
@@ -169,7 +169,7 @@ TEST_CASE( "Database SELECT (get) manipulation test" ) {
     size_t before_size = _tfoods.size();
     std::string before_food_name = _tfoods[before_size-1].name;
 
-    nutrition::nutrition_facts nutrition_fact_test = tfd.select_food(before_size-1);
+    nutrition::nutrition_facts nutrition_fact_test = tfd.at(before_size - 1);
 
     // Verification
     REQUIRE(nutrition_fact_test.name == _tfoods[before_size-1].name);
