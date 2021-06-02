@@ -43,21 +43,26 @@ TEST_CASE( "Basic facts values load test" ) {
     std::vector<nutrition::nutrition_facts> _tfoods;
     _tfoods = tfd.foods();
 
+    double one_decimal_limit = 0.0001;
+    double two_decimal_limit = 0.001;
+    double three_decimal_limit = 0.01;
+    double four_decimal_limit = 0.1;
+
     // Basic Facts
-    REQUIRE(_tfoods[0].protein == Approx(5.88).epsilon(0.0001));
-    REQUIRE(_tfoods[0].fat == Approx(13.24).epsilon(0.001));
-    REQUIRE(_tfoods[0].carbohydrates == Approx(41.18).epsilon(0.001));
-    REQUIRE(_tfoods[0].sugars == Approx(5.88).epsilon(0.0001));
-    REQUIRE(_tfoods[0].fiber == Approx(1.2).epsilon(0.0001));
-    REQUIRE(_tfoods[0].cholesterol == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[0].saturated_fats == Approx(2.941).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].protein == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].fat == Approx(100).epsilon(0.01));
-    REQUIRE(_tfoods[14163].carbohydrates == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].sugars == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].fiber == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].cholesterol == Approx(0).epsilon(0.0001));
-    REQUIRE(_tfoods[14163].saturated_fats == Approx(32.672).epsilon(0.001));
+    REQUIRE(_tfoods[0].protein == Approx(5.88).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].fat == Approx(13.24).epsilon(two_decimal_limit));
+    REQUIRE(_tfoods[0].carbohydrates == Approx(41.18).epsilon(two_decimal_limit));
+    REQUIRE(_tfoods[0].sugars == Approx(5.88).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].fiber == Approx(1.2).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].cholesterol == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[0].saturated_fats == Approx(2.941).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].protein == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].fat == Approx(100).epsilon(two_decimal_limit));
+    REQUIRE(_tfoods[14163].carbohydrates == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].sugars == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].fiber == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].cholesterol == Approx(0).epsilon(one_decimal_limit));
+    REQUIRE(_tfoods[14163].saturated_fats == Approx(32.672).epsilon(two_decimal_limit));
 }
 
 TEST_CASE( "Vitamins values correct load test" ) {
