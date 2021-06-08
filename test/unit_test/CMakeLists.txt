@@ -12,4 +12,5 @@ target_link_libraries(test-nutrition-facts PUBLIC nutrition-solver)
 
 # flags add to avoid
 add_executable(test-food-database test_food_database.cpp)
-target_link_libraries(test-food-database PUBLIC nutrition-solver -fprofile-arcs)
+#target_link_libraries(test-food-database PUBLIC nutrition-solver -fprofile-arcs)
+target_link_libraries(test-food-database PUBLIC nutrition-solver)
