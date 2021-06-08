@@ -32,15 +32,17 @@ namespace nutrition {
 
         [[nodiscard]] size_t size() const;
 
-        void remove(unsigned food_index);
+        void erase(unsigned food_index);
 
         void update(unsigned food_index, nutrition_facts food_to_update);
 
         void insert(const nutrition_facts& new_food);
 
-        nutrition_facts at(unsigned index);
+        [[nodiscard]] const nutrition_facts& at(unsigned index) const;
 
-        bool is_empty();
+        nutrition_facts operator[](unsigned index);
+
+        bool empty();
 
       private:
         /// \brief Nutrition facts for each food
