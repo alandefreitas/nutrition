@@ -11,7 +11,7 @@
 TEST_CASE( "Database Load test" ) {
     nutrition::food_database tfd;
     //const std::vector<nutrition::nutrition_facts>& _tfoods = tfd.foods();
-    REQUIRE(!tfd.is_empty());
+    REQUIRE_FALSE(tfd.empty());
 }
 
 TEST_CASE( "Calories and name load test" ) {
@@ -124,7 +124,7 @@ TEST_CASE( "Database DELETE manipulation test" ) {
     size_t before_size = _tfoods.size();
     std::string before_food_name = _tfoods[before_size-1].name;
 
-    tfd.remove(_tfoods.size()-1);
+    tfd.erase(_tfoods.size() - 1);
 
     _tfoods = tfd.foods();
 
