@@ -2,6 +2,8 @@
 // Created by Alan Freitas on 4/8/21.
 //
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wignored-qualifiers"
 #ifndef MODERN_NUTRITION_FOOD_DATABASE_H
 #define MODERN_NUTRITION_FOOD_DATABASE_H
 
@@ -40,9 +42,11 @@ namespace nutrition {
 
         [[nodiscard]] const nutrition_facts& at(unsigned index) const;
 
-        nutrition_facts operator[](unsigned index);
+        nutrition_facts& at(unsigned index);
 
-        bool empty();
+        nutrition_facts& operator[](unsigned index);
+
+        const bool empty();
 
       private:
         /// \brief Nutrition facts for each food
@@ -52,3 +56,5 @@ namespace nutrition {
 } // namespace nutrition
 
 #endif // MODERN_NUTRITION_FOOD_DATABASE_H
+
+#pragma clang diagnostic pop

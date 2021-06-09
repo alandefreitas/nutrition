@@ -86,7 +86,8 @@ namespace nutrition {
     void food_database::update(unsigned food_index, nutrition_facts new_food){foods_[food_index] = std::move(new_food);}
     void food_database::insert(const nutrition_facts& new_food) {foods_.push_back(new_food);}
     const nutrition_facts& food_database::at(unsigned index) const {return foods_[index];}
-    nutrition_facts food_database::operator[](unsigned index){return foods_[index];}
+    nutrition_facts& food_database::at(unsigned index) {return foods_[index];}
+    nutrition_facts& food_database::operator[](unsigned index){return foods_[index];}
 
-    bool food_database::empty(){return foods_.empty();}
+    bool food_database::empty() {return foods_.empty();}
 }
