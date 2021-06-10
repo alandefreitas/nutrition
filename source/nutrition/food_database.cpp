@@ -5,6 +5,7 @@
 #include "food_database.h"
 #include <fstream>
 #include <csv.hpp>
+#include <utility>
 
 namespace nutrition {
 
@@ -81,4 +82,13 @@ namespace nutrition {
     const std::vector<nutrition_facts> &food_database::foods() const { return foods_; }
     void food_database::foods(const std::vector<nutrition_facts> &foods) { foods_ = foods; }
     size_t food_database::size() const { return foods_.size(); }
+    void food_database::erase(unsigned food_index){foods_.erase(foods_.begin() + food_index);}
+    void food_database::update(unsigned food_index, nutrition_facts new_food){foods_[food_index] = std::move(new_food);}
+    void food_database::insert(const nutrition_facts& new_food) {foods_.push_back(new_food);}
+    const nutrition_facts& food_database::at(unsigned index) const {return foods_[index];}
+    nutrition_facts& food_database::at(unsigned index) {return foods_[index];}
+    nutrition_facts& food_database::operator[](unsigned index){return foods_[index];}
+    const bool &food_database::empty() const {
+        static const bool val = foods_.empty();
+        return val;}
 }
