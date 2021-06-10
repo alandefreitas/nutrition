@@ -88,6 +88,7 @@ namespace nutrition {
     const nutrition_facts& food_database::at(unsigned index) const {return foods_[index];}
     nutrition_facts& food_database::at(unsigned index) {return foods_[index];}
     nutrition_facts& food_database::operator[](unsigned index){return foods_[index];}
-
-    bool food_database::empty() {return foods_.empty();}
+    const bool &food_database::empty() const {
+        static const bool val = foods_.empty();
+        return val;}
 }
