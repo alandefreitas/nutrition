@@ -44,7 +44,7 @@ namespace nutrition {
 
         nutrition_facts& operator[](unsigned index);
 
-        bool empty();
+        [[nodiscard]] const bool &empty() const;
 
       private:
         /// \brief Nutrition facts for each food
