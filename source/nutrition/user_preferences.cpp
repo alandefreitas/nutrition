@@ -8,9 +8,47 @@ namespace nutrition {
 
     user_preferences::user_preferences(const food_database& db, size_t n_meals) {
         generate_mock_preferences(db, n_meals);
+        //generate_categry_mock_preferences(db, n_meals);
+        //extenal_preferences(db, n_meals);
+    }
+
+    std::vector<user_preferences::preference_matrix> &user_preferences::get_food_preferences(){
+        return this->user_preferences::food_preferences_;
     }
 
     void user_preferences::generate_mock_preferences(const food_database& db, size_t n_meals) {
+        // A generator that should be good enough for this
+        static std::mt19937 generator =
+            std::mt19937(static_cast<unsigned long>(std::chrono::system_clock::now().time_since_epoch().count()) |
+                         std::random_device()());
+
+        // Generate numbers between 0 and 1
+        std::uniform_real_distribution<double> rand_probability(0.0, 1.0);
+
+        // Probability the user rated the food
+        constexpr double probability_rated = 0.1;
+
+        // Preference might go from 0 to 10
+        std::normal_distribution<double> taste_distribution(5, 1.0);
+
+        // One preference table for each target meal
+        food_preferences_.resize(n_meals);
+
+        for (auto &preference_table : food_preferences_) {
+            // Make table n times n in size
+            preference_table.resize(n_meals, std::vector<std::optional<double>>(db.size(), std::nullopt));
+
+            for (auto &row : preference_table) {
+                for (auto &cell : row) {
+                    if (rand_probability(generator) < probability_rated) {
+                        cell = taste_distribution(generator);
+                    }
+                }
+            }
+        }
+    }
+
+    void user_preferences::generate_category_mock_preferences(const food_database& db, size_t n_meals) {
         // A generator that should be good enough for this
         static std::mt19937 generator =
             std::mt19937(static_cast<unsigned long>(std::chrono::system_clock::now().time_since_epoch().count()) |

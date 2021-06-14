@@ -27,9 +27,14 @@ namespace nutrition {
         /// \brief Construct a mock preference table
         explicit user_preferences(const food_database& db, size_t n_meals);
 
+        std::vector<preference_matrix>& get_food_preferences();
+
       private:
         /// \brief Construct mock preferences internally
         void generate_mock_preferences(const food_database& db, size_t n_meals);
+
+        /// \brief Construct mock preferences considering known categories preferences
+        // void generate_mock_preferences(const food_database& db, size_t n_meals);
 
       private:
         /// Food preference for each meal
