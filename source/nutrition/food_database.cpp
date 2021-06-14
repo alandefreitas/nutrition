@@ -42,6 +42,8 @@ namespace nutrition {
                 // Serving size (in grams)
                 tmp.serving_weight = double_or_zero(row["Serving Weight 1 (g)"]);
 
+                // TODO include category type
+
                 // Basic Facts
                 tmp.protein = double_or_zero(row["Protein (g)"]);
                 tmp.fat = double_or_zero(row["Fat (g)"]);
