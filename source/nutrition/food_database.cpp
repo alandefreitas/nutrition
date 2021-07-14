@@ -42,7 +42,8 @@ namespace nutrition {
                 // Serving size (in grams)
                 tmp.serving_weight = double_or_zero(row["Serving Weight 1 (g)"]);
 
-                // TODO include category type
+                // Food group type
+                tmp.food_type = row["Food Group"].get<std::string>();
 
                 // Basic Facts
                 tmp.protein = double_or_zero(row["Protein (g)"]);

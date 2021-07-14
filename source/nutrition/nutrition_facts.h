@@ -13,6 +13,7 @@ namespace nutrition {
     struct nutrition_facts {
         // Food name
         std::string name;
+        std::string food_type;
 
         // General
         double calories;
