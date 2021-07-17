@@ -25,12 +25,7 @@ namespace nutrition {
         std::vector<std::tuple<std::string,size_t,size_t>> ranged_preferences(const food_database& db);
 
         /// \brief Category range build
-        void breakfast();
-        void snack_1();
-        void lunch();
-        void snack_2();
-        void dinner();
-        void supper();
+        std::vector<std::pair<size_t, size_t>> construct(std::vector<std::string> _category_range, const food_database& db);
 
       public:
         /// \brief Construct a mock preference table
@@ -43,7 +38,7 @@ namespace nutrition {
         void generate_mock_preferences(const food_database& db, size_t n_meals);
 
         /// \brief Construct a mock preferences based on food categories and mealstime
-        void generate_category_mock_preferences(const food_database& db, size_t n_meals, int mealstime);
+        void generate_category_mock_preferences(const food_database& db, size_t n_meals);
 
         /// \brief Read external food database preference
         // void get_external_preferences(const food_database& db, size_t n_meals);

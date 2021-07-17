@@ -49,7 +49,9 @@ namespace nutrition {
         }
     }
 
-    std::vector<std::tuple<std::string,size_t,size_t>> user_preferences::ranged_preferences(const food_database& db){
+    /// Function that returns foodtype range of a ordered database
+    std::vector<std::tuple<std::string,size_t,size_t>> user_preferences::ranged_preferences(
+        const food_database& db){
 
         std::vector<std::tuple<std::string,size_t,size_t>> _ranges;
         for (size_t i = 0; i < db.size(); i++){
@@ -70,20 +72,27 @@ namespace nutrition {
         return _ranges;
     }
 
-    // Breakfast
-    void user_preferences::breakfast(){}
-    // Snack 1
-    void user_preferences::snack_1() {}
-    // Lunch
-    void user_preferences::lunch(){}
-    // Snack 2
-    void user_preferences::snack_2(){}
-    // Dinner
-    void user_preferences::dinner(){}
-    // Supper
-    void user_preferences::supper(){}
+    // Range based on string comparison
+    std::vector<std::pair<size_t, size_t>> user_preferences::construct(std::vector<std::string> _food_types_included, const food_database& db){
 
-    void user_preferences::generate_category_mock_preferences(const food_database& db, size_t n_meals, int mealstime) {
+        // Food-type of databases
+        std::vector<std::tuple<std::string, size_t, size_t>> _category_range = ranged_preferences(db);
+        std::vector<std::pair<size_t, size_t>> _mealtime_ranges;
+            for (std::string x : _food_types_included) {
+                for (size_t i = 0; i < _category_range.size(); i++){
+                    if (std::get<0>(_category_range[i]) == x) {
+                        size_t first = std::get<1>(_category_range[i]);
+                        size_t last = std::get<2>(_category_range[i]);
+                        std::pair<size_t, size_t> aux = {first, last};
+                        _mealtime_ranges.push_back(aux);
+                    }
+                }
+            }
+            return _mealtime_ranges;
+    }
+
+
+    void user_preferences::generate_category_mock_preferences(const food_database& db, size_t n_meals) {
     // A generator that should be good enough for this
     static std::mt19937 generator =
         std::mt19937(static_cast<unsigned long>(std::chrono::system_clock::now().time_since_epoch().count()) |
@@ -101,18 +110,7 @@ namespace nutrition {
     // One preference table for each target meal
     food_preferences_.resize(n_meals);
 
-    // Food-type of databases
-    std::vector<std::tuple<std::string, size_t, size_t>> _category_range = ranged_preferences(db);
-
-    // Food-types selected to be included in each measltime
-    std::vector<std::pair<size_t, size_t>> _breakfast_pairs;
-    std::vector<std::pair<size_t, size_t>> _snack1_pairs;
-    std::vector<std::pair<size_t, size_t>> _lunch_pairs;
-    std::vector<std::pair<size_t, size_t>> _snack2_pairs;
-    std::vector<std::pair<size_t, size_t>> _dinner_pairs;
-    std::vector<std::pair<size_t, size_t>> _supper_pairs;
-
-    /// Categories of USDA DB used
+    /// All Categories of USDA DB used
     // Baked Foods, Snacks, Sweets, Vegetables, American Indian, Restaurant Foods, Beverages
     // Fats and Oils, Baby Foods, Beans and Lentils, Breakfast Cereals, Dairy and Egg Products, Fast Foods
     // Fish, Fruits, Grains and Pasta, Meats, NULL, Nuts and Seeds, Prepared Meals, Soups and Sauces
@@ -125,21 +123,45 @@ namespace nutrition {
     // Snack 2: Snacks, Beverages, Fast Foods
     // Dinner: Beans and Lentils, Prepared Meals, Vegetables, Grains and Pasta, Meats
     // Supper: Soups and Sauces, Nuts and Seeds
+
+    // Food-types selected to be included in each measltime
+    std::vector<std::pair<size_t, size_t>> _breakfast_pairs;
+    std::vector<std::pair<size_t, size_t>> _snack1_pairs;
+    std::vector<std::pair<size_t, size_t>> _lunch_pairs;
+    std::vector<std::pair<size_t, size_t>> _snack2_pairs;
+    std::vector<std::pair<size_t, size_t>> _dinner_pairs;
+    std::vector<std::pair<size_t, size_t>> _supper_pairs;
+
+    std::vector<std::string> _breakfast = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _morning_snack = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _lunch = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _afternoon_snack = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _dinner = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _supper = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+
     try {
         if (n_meals == 6) {
-            switch (mealstime) {
-            case 0: {
-            } break;
-            case 1: {
-            } break;
-            case 2: {
-            } break;
-            case 3: {
-            } break;
-            case 4: {
-            } break;
-            case 5: {
-            } break;
+            for (size_t i =0; i < n_meals; i++){
+                switch (i) {
+                    case 0: {
+                        _breakfast_pairs = construct(_breakfast, db);
+                    } break;
+                    case 1: {
+                        _snack1_pairs = construct(_morning_snack, db);
+                    } break;
+                    case 2: {
+                        _lunch_pairs = construct(_lunch, db);
+                    } break;
+                    case 3: {
+                        _snack2_pairs = construct(_afternoon_snack, db);
+                    } break;
+                    case 4: {
+                        _dinner_pairs = construct(_dinner, db);
+                    } break;
+                    case 5: {
+                        _supper_pairs = construct(_supper, db);
+                    } break;
+                }
             }
         }
     }catch(std::exception &e) {
