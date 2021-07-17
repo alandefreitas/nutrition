@@ -22,8 +22,7 @@
 
 ## TODO list
 
-- Unit tests for nutrition database - ON GOING
-- User preferences class and unit tests
+- User preferences class and unit tests ON GOING
 - User preference database and unit tests
 - User targets and unit tests
 - User diet and unit tests

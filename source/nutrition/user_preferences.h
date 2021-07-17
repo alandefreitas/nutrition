@@ -1,5 +1,3 @@
-
-
 #ifndef NUTRITION_PREFERENCES_H
 #define NUTRITION_PREFERENCES_H
 
@@ -23,13 +21,27 @@ namespace nutrition {
         /// \brief Table type with food preferences for each meal
         using preference_matrix = std::vector<std::vector<std::optional<double>>>;
 
+        /// \brief Tuple with food category range used for preferences calculation
+        std::vector<std::tuple<std::string,size_t,size_t>> ranged_preferences(const food_database& db);
+
+        /// \brief Category range build
+        std::vector<std::pair<size_t, size_t>> construct(std::vector<std::string> _category_range, const food_database& db);
+
       public:
         /// \brief Construct a mock preference table
         explicit user_preferences(const food_database& db, size_t n_meals);
 
+        std::vector<preference_matrix>& get_food_preferences();
+
       private:
-        /// \brief Construct mock preferences internally
+        /// \brief Construct random mock preferences internally
         void generate_mock_preferences(const food_database& db, size_t n_meals);
+
+        /// \brief Construct a mock preferences based on food categories and mealstime
+        void generate_category_mock_preferences(const food_database& db, size_t n_meals);
+
+        /// \brief Read external food database preference
+        // void get_external_preferences(const food_database& db, size_t n_meals);
 
       private:
         /// Food preference for each meal

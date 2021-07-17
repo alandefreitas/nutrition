@@ -3,11 +3,18 @@
 
 #include <utility>
 #include <chrono>
+#include <stdexcept>
 
 namespace nutrition {
 
     user_preferences::user_preferences(const food_database& db, size_t n_meals) {
-        generate_mock_preferences(db, n_meals);
+        //generate_mock_preferences(db, n_meals);
+        generate_category_mock_preferences(db, n_meals);
+        //extenal_preferences(db, n_meals);
+    }
+
+    std::vector<user_preferences::preference_matrix> &user_preferences::get_food_preferences(){
+        return this->user_preferences::food_preferences_;
     }
 
     void user_preferences::generate_mock_preferences(const food_database& db, size_t n_meals) {
@@ -42,7 +49,127 @@ namespace nutrition {
         }
     }
 
-    //    // Preferences variables
+    /// Function that returns foodtype range of a ordered database
+    std::vector<std::tuple<std::string,size_t,size_t>> user_preferences::ranged_preferences(
+        const food_database& db){
+
+        std::vector<std::tuple<std::string,size_t,size_t>> _ranges;
+        for (size_t i = 0; i < db.size(); i++){
+            std::string type_name;
+            size_t first;
+            size_t last;
+            if(i==0){
+                type_name = db.at(i).food_type;
+                first = i;
+            } else if(type_name != db.at(i).food_type){
+                last = i-1;
+                std::tuple<std::string,size_t,size_t> full_category = {type_name,first,last};
+                _ranges.push_back(full_category);
+                type_name = db.at(i).food_type;
+                first = i;
+            }
+        }
+        return _ranges;
+    }
+
+    // Range based on string comparison
+    std::vector<std::pair<size_t, size_t>> user_preferences::construct(std::vector<std::string> _food_types_included, const food_database& db){
+
+        // Food-type of databases
+        std::vector<std::tuple<std::string, size_t, size_t>> _category_range = ranged_preferences(db);
+        std::vector<std::pair<size_t, size_t>> _mealtime_ranges;
+            for (std::string x : _food_types_included) {
+                for (size_t i = 0; i < _category_range.size(); i++){
+                    if (std::get<0>(_category_range[i]) == x) {
+                        size_t first = std::get<1>(_category_range[i]);
+                        size_t last = std::get<2>(_category_range[i]);
+                        std::pair<size_t, size_t> aux = {first, last};
+                        _mealtime_ranges.push_back(aux);
+                    }
+                }
+            }
+            return _mealtime_ranges;
+    }
+
+
+    void user_preferences::generate_category_mock_preferences(const food_database& db, size_t n_meals) {
+    // A generator that should be good enough for this
+    static std::mt19937 generator =
+        std::mt19937(static_cast<unsigned long>(std::chrono::system_clock::now().time_since_epoch().count()) |
+                     std::random_device()());
+
+    // Generate numbers between 0 and 1
+    std::uniform_real_distribution<double> rand_probability(0.0, 1.0);
+
+    // Probability the user rated the food
+    constexpr double probability_rated = 0.5;
+
+    // Preference might go from 0 to 10
+    std::normal_distribution<double> taste_distribution(5, 1.0);
+
+    // One preference table for each target meal
+    food_preferences_.resize(n_meals);
+
+    /// All Categories of USDA DB used
+    // Baked Foods, Snacks, Sweets, Vegetables, American Indian, Restaurant Foods, Beverages
+    // Fats and Oils, Baby Foods, Beans and Lentils, Breakfast Cereals, Dairy and Egg Products, Fast Foods
+    // Fish, Fruits, Grains and Pasta, Meats, NULL, Nuts and Seeds, Prepared Meals, Soups and Sauces
+    // Spices and Herbs,
+
+    /// History preferable categories:
+    // Breakfast: fruits, Dairy and Egg Products, Breakfast Cereals
+    // Snack 1: Snacks, Beverages
+    // Lunch: Restaurant Foods, Beans and Lentils, Vegetables, Grains and Pasta, Meats
+    // Snack 2: Snacks, Beverages, Fast Foods
+    // Dinner: Beans and Lentils, Prepared Meals, Vegetables, Grains and Pasta, Meats
+    // Supper: Soups and Sauces, Nuts and Seeds
+
+    // Food-types selected to be included in each measltime
+    std::vector<std::pair<size_t, size_t>> _breakfast_pairs;
+    std::vector<std::pair<size_t, size_t>> _snack1_pairs;
+    std::vector<std::pair<size_t, size_t>> _lunch_pairs;
+    std::vector<std::pair<size_t, size_t>> _snack2_pairs;
+    std::vector<std::pair<size_t, size_t>> _dinner_pairs;
+    std::vector<std::pair<size_t, size_t>> _supper_pairs;
+
+    std::vector<std::string> _breakfast = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _morning_snack = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _lunch = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _afternoon_snack = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _dinner = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+    std::vector<std::string> _supper = {"fruits", "Dairy and Egg Products", "Breakfast Cereals"};
+
+    try {
+        if (n_meals == 6) {
+            for (size_t i =0; i < n_meals; i++){
+                switch (i) {
+                    case 0: {
+                        _breakfast_pairs = construct(_breakfast, db);
+                    } break;
+                    case 1: {
+                        _snack1_pairs = construct(_morning_snack, db);
+                    } break;
+                    case 2: {
+                        _lunch_pairs = construct(_lunch, db);
+                    } break;
+                    case 3: {
+                        _snack2_pairs = construct(_afternoon_snack, db);
+                    } break;
+                    case 4: {
+                        _dinner_pairs = construct(_dinner, db);
+                    } break;
+                    case 5: {
+                        _supper_pairs = construct(_supper, db);
+                    } break;
+                }
+            }
+        }
+    }catch(std::exception &e) {
+        std::cout << "Number of meals not considered in category mock history." << std::endl;
+    }
+}
+
+// Preferences variables
 //    std::vector<int> _breakfastPreferences;
 //    std::vector<int> _breakfastPortionPreferences;
 //    std::vector<int> _snack1Preferences;
